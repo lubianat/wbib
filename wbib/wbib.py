@@ -3,12 +3,12 @@ import os
 import glob
 import urllib.parse
 import pandas as pd
-import queries as queries
+from wbib import queries 
 import unicodedata
 
 def format_with_prefix(list_of_qids):
     list_with_prefix = ["wd:" + i for i in list_of_qids]
-    return("{ " + " ".join(list_with_prefix) + "}")
+    return("{ " + " ".join(list_with_prefix) + " }")
 
 def render_dashboard(qids_for_articles, site_title = "Wikidata Bibtex", site_subtitle = "Demonstration"):
     """
@@ -123,7 +123,7 @@ def render_dashboard(qids_for_articles, site_title = "Wikidata Bibtex", site_sub
   </footer>
 </body>
 </html>
-  """
-  return(html)
+  """ 
+    return(html)
 
 
