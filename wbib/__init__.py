@@ -1,5 +1,5 @@
 """Top-level package for Wikidata Bib."""
 
 __author__ = """Tiago Lubiana"""
-__email__ = 'tiago.lubiana.alves@usp.br'
-__version__ = '0.1.2'
+__email__ = "tiago.lubiana.alves@usp.br"
+__version__ = "0.1.3"
