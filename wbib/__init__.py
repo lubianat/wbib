@@ -2,4 +2,4 @@
 
 __author__ = """Tiago Lubiana"""
 __email__ = "tiago.lubiana.alves@usp.br"
-__version__ = "0.1.3"
+__version__ = "0.1.4"
