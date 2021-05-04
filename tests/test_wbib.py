@@ -17,6 +17,8 @@ class TestWbib(unittest.TestCase):
     def test_if_queries_run(self):
         qids = ["Q35185544", "Q34555562", "Q21284234"]
         html = wbib.render_dashboard(qids)
+        with open("tests/index.html", "w") as f:
+            f.write(html)
         assert "Demonstration" in html
 
     def test_format_with_prefix(self):

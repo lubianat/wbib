@@ -1,10 +1,49 @@
 import urllib.parse
 
+
 def render_url(query):
-  return "https://query.wikidata.org/embed.html#" + urllib.parse.quote(query, safe='')
-  
+    return "https://query.wikidata.org/embed.html#" + urllib.parse.quote(query, safe="")
+
+
+def get_query_url_for_missing_author_items(readings):
+    query = (
+        """
+  #defaultView:Table
+  SELECT
+    (COUNT(?work) AS ?count) 
+    ?author_name
+    (CONCAT(
+        'https://author-disambiguator.toolforge.org/names_oauth.php?doit=Look+for+author&name=',
+        ENCODE_FOR_URI(?author_name)) AS ?author_resolver_url)
+  WHERE {
+    {
+      SELECT DISTINCT ?author_name {
+        VALUES ?work    """
+        + readings
+        + """.
+        ?work wdt:P50 ?researcher_. 
+        ?researcher_ skos:altLabel | rdfs:label ?author_name_ .
+        
+        # The SELECT-DISTINCT-BIND trick here is due to Stanislav Kralin
+        # https://stackoverflow.com/questions/53933564
+        BIND (STR(?author_name_) AS ?author_name)
+      }
+      LIMIT 2000
+    }
+    OPTIONAL { ?work wdt:P2093 ?author_name . }
+  }
+  GROUP BY ?author_name 
+  HAVING (?count > 0)
+  ORDER BY DESC(?count)
+  """
+    )
+
+    return render_url(query)
+
+
 def get_query_url_for_articles(readings):
-  query = """
+    query = (
+        """
 
   #defaultView:Table
   SELECT
@@ -15,7 +54,9 @@ def get_query_url_for_articles(readings):
   ?venue ?venueLabel
   (GROUP_CONCAT(DISTINCT ?author_label; separator=", ") AS ?authors)
   WHERE {
-  VALUES ?work """ +  readings + """.
+  VALUES ?work """
+        + readings
+        + """.
   ?work wdt:P50 ?author .
   OPTIONAL {
     ?author rdfs:label ?author_label_ . FILTER (LANG(?author_label_) = 'en')
@@ -32,12 +73,15 @@ def get_query_url_for_articles(readings):
   ORDER BY DESC(?date)  
 
   """
-  
-  return render_url(query)
+    )
+
+    return render_url(query)
+
 
 def get_query_url_for_topic_bubble(readings):
 
-  query = """
+    query = (
+        """
 
   #defaultView:BubbleChart
   SELECT ?score ?topic ?topicLabel
@@ -48,14 +92,18 @@ def get_query_url_for_topic_bubble(readings):
     WHERE {
           {
         SELECT (100 AS ?score_) ?topic WHERE {
-          VALUES ?work """ +  readings + """.
+          VALUES ?work """
+        + readings
+        + """.
           ?work  wdt:P921 ?topic . 
         }
       }
       UNION
       {
         SELECT (1 AS ?score_) ?topic WHERE {
-          VALUES ?work """ +  readings + """.
+          VALUES ?work """
+        + readings
+        + """.
           ?citing_work wdt:P2860 ?work .
           ?citing_work wdt:P921 ?topic . 
         }
@@ -71,10 +119,13 @@ def get_query_url_for_topic_bubble(readings):
   LIMIT 50
 
   """
-  return render_url(query) 
+    )
+    return render_url(query)
+
 
 def get_topics_as_table(readings):
-  query_3 = """
+    query_3 = (
+        """
 
 
   #defaultView:Table
@@ -82,7 +133,9 @@ def get_topics_as_table(readings):
   WITH {
     SELECT (COUNT(?work) AS ?count) ?theme (SAMPLE(?work) AS ?example_work)
     WHERE {
-      VALUES ?work """ +  readings + """.
+      VALUES ?work """
+        + readings
+        + """.
       ?work wdt:P921 ?theme .
     }
     GROUP BY ?theme
@@ -94,10 +147,13 @@ def get_topics_as_table(readings):
   ORDER BY DESC(?count) 
 
   """
-  return render_url(query_3) 
+    )
+    return render_url(query_3)
+
 
 def get_query_url_for_venues(readings):
-  query_4 = """
+    query_4 = (
+        """
 
 
   # Venue statistics for a collection
@@ -111,7 +167,9 @@ def get_query_url_for_venues(readings):
       ?venue
       (GROUP_CONCAT(DISTINCT ?topic_label; separator=", ") AS ?topics)
     WHERE {
-      VALUES ?work """ +  readings + """.
+      VALUES ?work """
+        + readings
+        + """.
       ?work wdt:P1433 ?venue .
       OPTIONAL {
         ?venue wdt:P921 ?topic .
@@ -128,10 +186,13 @@ def get_query_url_for_venues(readings):
   ORDER BY DESC(?count)
 
   """
-  return render_url(query_4) 
+    )
+    return render_url(query_4)
+
 
 def get_query_url_for_locations(readings):
-  query_5 = """
+    query_5 = (
+        """
 #defaultView:Map
 SELECT 
 ?organization ?organizationLabel 
@@ -146,7 +207,9 @@ SELECT
     (SAMPLE(?work) as ?sample_work) 
     (SAMPLE(?author) as ?sample_author) WHERE {
 
-      VALUES ?work """ +  readings + """.
+      VALUES ?work """
+        + readings
+        + """.
           ?work wdt:P50 ?author .
       ?author ( wdt:P108 | wdt:P463 | wdt:P1416 ) / wdt:P361* ?organization . 
       ?organization wdt:P625 ?geo .
@@ -164,10 +227,13 @@ SELECT
 
 
   """
-  return render_url(query_5)
+    )
+    return render_url(query_5)
+
 
 def get_query_url_for_citing_authors(readings):
-  query_6 = """
+    query_6 = (
+        """
 
 
   #defaultView:Table
@@ -179,7 +245,9 @@ def get_query_url_for_citing_authors(readings):
     (COALESCE(?orcid_, CONCAT("orcid-search/quick-search/?searchQuery=", ENCODE_FOR_URI(?citing_authorLabel))) AS ?orcid)
   WITH {
     SELECT (COUNT(?citing_work) AS ?count) ?citing_author WHERE {
-      VALUES ?work """ +  readings + """.
+      VALUES ?work """
+        + readings
+        + """.
       ?citing_work wdt:P2860 ?work . 
       ?citing_work wdt:P50 ?citing_author .
     }
@@ -208,13 +276,18 @@ def get_query_url_for_citing_authors(readings):
 
 
   """
-  return render_url(query_6)
+    )
+    return render_url(query_6)
+
 
 def get_query_url_for_authors(readings):
-  query_7 = """
+    query_7 = (
+        """
   #defaultView:Table
   SELECT (COUNT(?work) AS ?count) ?author ?authorLabel ?orcids  WHERE {
-    VALUES ?work """ +  readings + """.
+    VALUES ?work """
+        + readings
+        + """.
     ?work wdt:P50 ?author .
       OPTIONAL { ?author wdt:P496 ?orcids }
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en,da,de,es,fr,jp,nl,no,ru,sv,zh". }
@@ -224,4 +297,6 @@ def get_query_url_for_authors(readings):
   ORDER BY DESC(?count)
 
   """
-  return render_url(query_7)
+    )
+    return render_url(query_7)
+
