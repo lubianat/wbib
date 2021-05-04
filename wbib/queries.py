@@ -5,6 +5,52 @@ def render_url(query):
     return "https://query.wikidata.org/embed.html#" + urllib.parse.quote(query, safe="")
 
 
+def get_query_url_for_author_without_affiliation(readings):
+    query = (
+        """
+# tool: scholia
+# title: Employees and affiliated with a specified organization
+SELECT
+  (SAMPLE(?number_of_works_) AS ?works)
+  (SAMPLE(?wikis_) AS ?wikis)
+  ?researcher ?researcherLabel ?researcherDescription
+  (SAMPLE(?orcid_) AS ?orcid)
+WITH {
+  SELECT DISTINCT ?researcher WHERE {
+  VALUES ?work """
+        + readings
+        + """.
+    ?work wdt:P50 ?researcher.
+    
+    MINUS {?researcher ( wdt:P108 | wdt:P463 | wdt:P1416 ) / wdt:P361* ?organization .}
+  } 
+} AS %researchers
+WITH {
+  SELECT
+    (COUNT(?work) AS ?number_of_works_) ?researcher
+  WHERE {
+    INCLUDE %researchers
+    OPTIONAL { ?work wdt:P50 ?researcher . }
+
+    # No biological pathways; they skew the statistics too much 
+    MINUS { ?work wdt:P31 wd:Q4915012 } 
+  } 
+  GROUP BY ?researcher
+} AS %researchers_and_number_of_works
+WHERE {
+  INCLUDE %researchers_and_number_of_works
+  OPTIONAL { ?researcher wdt:P496 ?orcid_ . }
+  OPTIONAL { ?researcher wikibase:sitelinks ?wikis_ }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en,da,de,es,fr,nl,no,ru,sv,zh" . } 
+}
+GROUP BY ?researcher ?researcherLabel ?researcherDescription 
+ORDER BY DESC(?works)
+  """
+    )
+
+    return render_url(query)
+
+
 def get_query_url_for_missing_author_items(readings):
     query = (
         """

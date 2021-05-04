@@ -38,8 +38,12 @@ DEFAULT_QUERY_OPTIONS = {
         "query": queries.get_query_url_for_venues,
     },
     "curation of author items": {
-        "label": "curation: curate author strings not linked to items",
+        "label": "curation: curate author strings that are not yet linked to items",
         "query": queries.get_query_url_for_missing_author_items,
+    },
+    "curation of author affiliations": {
+        "label": "curation: add affiliation/employment for authors lacking it",
+        "query": queries.get_query_url_for_author_without_affiliation,
     },
 }
 
@@ -50,6 +54,7 @@ DEFAULT_SESSIONS = [
     "list of topics",
     "list of journals",
     "curation of author items",
+    "curation of author affiliations",
 ]
 
 
