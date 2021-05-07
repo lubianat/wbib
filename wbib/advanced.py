@@ -2,7 +2,7 @@ import urllib.parse
 import yaml
 
 
-def render_section(query_name, query_options, yaml_file):
+def render_section(query_name, query_options, info, mode):
 
     legend = query_options[query_name]["label"]
     query_url = query_options[query_name]["query"]
@@ -14,7 +14,7 @@ def render_section(query_name, query_options, yaml_file):
         <p align="center">
         <iframe width=75%  height="400" src="""
         + '"'
-        + query_url(yaml_file)
+        + query_url(info, mode)
         + '"'
         + """></iframe>
         </p>
@@ -24,12 +24,12 @@ def render_section(query_name, query_options, yaml_file):
     return section
 
 
-def render_sections(query_name_list, query_options, yaml_file):
+def render_sections(query_name_list, query_options, info, mode):
 
     sections = ""
     for name in query_name_list:
         sections += render_section(
-            name, query_options=query_options, yaml_file=yaml_file
+            name, query_options=query_options, info=info, mode=mode
         )
     return sections
 
@@ -89,117 +89,127 @@ def format_with_prefix(list_of_qids):
     return " ".join(list_with_prefix)
 
 
-def get_selector(yaml_file):
+def get_selector(info, mode="advanced"):
     """
     The selector that decides the scope of the dashboard. It MUST have the keywords
     ?work and ?author. 
     You can override everything here by adapting the query on WDQS:
     https://w.wiki/3Cmd
+
+    Args:
+        info: either a dict containing complex information for the selector or a list of QIDs
+        mode: a string representing the mode. If "advanced", then a config is expected for the
+          info parameters. If "basic", a list of QIDs is expected. Defaults to "advanced".
+
     """
 
-    fields_of_work = yaml_file["restriction"]["author_area"]
+    if mode == "advanced":
+        fields_of_work = info["restriction"]["author_area"]
 
-    if fields_of_work is not None:
-        field_of_work_selector = (
+        if fields_of_work is not None:
+            field_of_work_selector = (
+                """
+                VALUES ?field_of_work {"""
+                + format_with_prefix(fields_of_work)
+                + """}
+                ?author wdt:P101 ?field_of_work.
+                """
+            )
+        else:
+            field_of_work_selector = ""
+
+        topic_of_work = info["restriction"]["topic_of_work"]
+
+        if topic_of_work is not None:
+            topic_of_work_selector = (
+                """
+                VALUES ?topics {"""
+                + format_with_prefix(topic_of_work)
+                + """}
+                ?work wdt:P921/wdt:P279* ?topics.
+                """
+            )
+        else:
+            topic_of_work_selector = ""
+
+        region = info["restriction"]["institution_region"]
+
+        if region is not None:
+            region_selector = (
+                """
+                VALUES ?regions {"""
+                + format_with_prefix(region)
+                + """}
+                ?country wdt:P361* ?regions.
+                ?author ( wdt:P108 | wdt:P463 | wdt:P1416 ) / wdt:P361* ?organization . 
+                ?organization wdt:P17 ?country.
+                """
+            )
+        else:
+            region_selector = ""
+
+        gender = info["restriction"]["gender"]
+        if gender is not None:
+            gender_selector = (
+                """
+                VALUES ?regions {"""
+                + format_with_prefix(gender)
+                + """}
+                ?author wdt:P21 wd:Q6581072.
+                """
+            )
+        else:
+            gender_selector = ""
+
+        event = info["restriction"]["event"]
+
+        if event is not None:
+
+            # P823 - speaker
+            # P664 - organizer
+            # P1334 - has participant
+            # ^P710 - inverse of (participated in)
+            event_selector = (
+                """
+                VALUES ?event {"""
+                + format_with_prefix(event)
+                + """}
+                ?event wdt:P823 |  wdt:P664 | wdt:P1344 | ^wdt:P710 ?author.
+                """
+            )
+        else:
+            event_selector = ""
+
+        author_is_topic_of = info["restriction"]["author_is_topic_of"]
+
+        if author_is_topic_of is not None:
+            author_is_topic_of_selector = (
+                """
+                VALUES ?biographical_work {"""
+                + format_with_prefix(author_is_topic_of)
+                + """}
+                ?biographical_work wdt:P921 ?author.
+                """
+            )
+        else:
+            author_is_topic_of_selector = ""
+
+        selector = (
+            field_of_work_selector
+            + topic_of_work_selector
+            + region_selector
+            + gender_selector
+            + event_selector
+            + author_is_topic_of_selector
+            + """
+            ?work wdt:P50 ?author.
             """
-        VALUES ?field_of_work {"""
-            + format_with_prefix(fields_of_work)
-            + """}
-        ?author wdt:P101 ?field_of_work.
-        """
         )
     else:
-        field_of_work_selector = ""
-
-    topic_of_work = yaml_file["restriction"]["topic_of_work"]
-
-    if topic_of_work is not None:
-        topic_of_work_selector = (
-            """
-        VALUES ?topics {"""
-            + format_with_prefix(topic_of_work)
-            + """}
-        ?work wdt:P921/wdt:P279* ?topics.
+        selector = f"""
+        VALUES ?work {{ {format_with_prefix(info)} }} .
+        ?work wdt:P50 ?author .
         """
-        )
-    else:
-        topic_of_work_selector = ""
-
-    region = yaml_file["restriction"]["institution_region"]
-
-    if region is not None:
-        region_selector = (
-            """
-        VALUES ?regions {"""
-            + format_with_prefix(region)
-            + """}
-        ?country wdt:P361* ?regions.
-        ?author ( wdt:P108 | wdt:P463 | wdt:P1416 ) / wdt:P361* ?organization . 
-        ?organization wdt:P17 ?country.
-        """
-        )
-    else:
-        region_selector = ""
-
-    gender = yaml_file["restriction"]["gender"]
-    if gender is not None:
-        gender_selector = (
-            """
-        VALUES ?regions {"""
-            + format_with_prefix(gender)
-            + """}
-        ?author wdt:P21 wd:Q6581072.
-        """
-        )
-    else:
-        gender_selector = ""
-
-    event = yaml_file["restriction"]["event"]
-
-    if event is not None:
-
-        # P823 - speaker
-        # P664 - organizer
-        # P1334 - has participant
-        # ^P710 - inverse of (participated in)
-        event_selector = (
-            """
-        VALUES ?event {"""
-            + format_with_prefix(event)
-            + """}
-        ?event wdt:P823 |  wdt:P664 | wdt:P1344 | ^wdt:P710 ?author.
-        """
-        )
-    else:
-        event_selector = ""
-
-    author_is_topic_of = yaml_file["restriction"]["author_is_topic_of"]
-
-    if author_is_topic_of is not None:
-        author_is_topic_of_selector = (
-            """
-        VALUES ?biographical_work {"""
-            + format_with_prefix(author_is_topic_of)
-            + """}
-        ?biographical_work wdt:P921 ?author.
-        """
-        )
-    else:
-        author_is_topic_of_selector = ""
-
-    selector = (
-        field_of_work_selector
-        + topic_of_work_selector
-        + region_selector
-        + gender_selector
-        + event_selector
-        + author_is_topic_of_selector
-        + """
-    ?work wdt:P50 ?author.
-    """
-    )
-    print(selector)
-
     return selector
 
 
@@ -207,7 +217,7 @@ def render_url(query):
     return "https://query.wikidata.org/embed.html#" + urllib.parse.quote(query, safe="")
 
 
-def get_query_url_for_articles(yaml_file):
+def get_query_url_for_articles(info, mode):
     query = (
         """
   #defaultView:Table
@@ -219,7 +229,7 @@ def get_query_url_for_articles(yaml_file):
   (GROUP_CONCAT(DISTINCT ?author_label; separator=", ") AS ?authores)
   WHERE {
   """
-        + get_selector(yaml_file)
+        + get_selector(info, mode)
         + """
   OPTIONAL {
     ?author rdfs:label ?author_label_ . FILTER (LANG(?author_label_) = 'en')
@@ -240,7 +250,7 @@ def get_query_url_for_articles(yaml_file):
     return render_url(query)
 
 
-def get_topics_as_table(yaml_file):
+def get_topics_as_table(info, mode):
     query_3 = (
         """
   #defaultView:Table
@@ -249,7 +259,7 @@ def get_topics_as_table(yaml_file):
     SELECT (COUNT(?work) AS ?count) ?theme (SAMPLE(?work) AS ?example_work)
     WHERE {
       """
-        + get_selector(yaml_file)
+        + get_selector(info, mode)
         + """
       ?work wdt:P921 ?theme .
     }
@@ -266,7 +276,7 @@ def get_topics_as_table(yaml_file):
     return render_url(query_3)
 
 
-def get_query_url_for_venues(yaml_file):
+def get_query_url_for_venues(info, mode):
     query_4 = (
         """
   # Venue statistics for a collection
@@ -281,7 +291,7 @@ def get_query_url_for_venues(yaml_file):
       (GROUP_CONCAT(DISTINCT ?topic_label; separator=", ") AS ?topics)
     WHERE {
       """
-        + get_selector(yaml_file)
+        + get_selector(info, mode)
         + """
       ?work wdt:P1433 ?journal .
       OPTIONAL {
@@ -302,7 +312,7 @@ def get_query_url_for_venues(yaml_file):
     return render_url(query_4)
 
 
-def get_query_url_for_locations(yaml_file):
+def get_query_url_for_locations(info, mode):
     query_5 = (
         """
   #defaultView:Map
@@ -310,7 +320,7 @@ def get_query_url_for_locations(yaml_file):
   WITH {
     SELECT DISTINCT ?organization ?geo (COUNT(DISTINCT ?work) AS ?count) WHERE {
       """
-        + get_selector(yaml_file)
+        + get_selector(info, mode)
         + """
       ?author ( wdt:P108 | wdt:P463 | wdt:P1416 ) / wdt:P361* ?organization . 
       ?organization wdt:P625 ?geo .
@@ -330,13 +340,13 @@ def get_query_url_for_locations(yaml_file):
     return render_url(query_5)
 
 
-def get_query_url_for_authors(yaml_file):
+def get_query_url_for_authors(info, mode):
     query_7 = (
         """
   #defaultView:Table
   SELECT (COUNT(?work) AS ?article_count) ?author ?authorLabel ?orcids  ?organizationLabel  ?countryLabel WHERE {
     """
-        + get_selector(yaml_file)
+        + get_selector(info, mode)
         + """
   OPTIONAL { ?author ( wdt:P108 | wdt:P463 | wdt:P1416 ) ?organization .
            OPTIONAL { ?organization wdt:P17 ?country . }               
@@ -378,24 +388,49 @@ DEFAULT_ADVANCED_SESSIONS = [
 
 
 def render_dashboard(
-    config,
+    info,
+    mode="advanced",
     query_options=DEFAULT_ADVANCED_QUERY_OPTIONS,
     sections_to_add=DEFAULT_ADVANCED_SESSIONS,
+    site_title="Wikidata Bibtex",
+    site_subtitle="Demonstration",
 ):
     """
-  - Args:
-     - config: A .yaml file with the configs
+    Args:
+        info: either a dict containing complex information for the selector or a list of QIDs
+        mode: a string representing the mode. If "advanced", then a config is expected for the
+          info parameters. If "basic", a list of QIDs is expected. Defaults to "advanced".
   """
-    license_statement = config["license_statement"]
-    scholia_credit_statement = config["scholia_credit"]
-    creator_statement = config["creator_credit"]
-    site_title = config["title"]
-    site_subtitle = config["subtitle"]
+
+    if mode == "advanced":
+        if not isinstance(info, dict):
+            raise TypeError(
+                "In advanced mode, 'info' needs to be a dict obtained from the standard yaml file"
+            )
+        else:
+            license_statement = info["license_statement"]
+            scholia_credit_statement = info["scholia_credit"]
+            creator_statement = info["creator_credit"]
+            site_title = info["title"]
+            site_subtitle = info["subtitle"]
+
+    if mode == "basic":
+        license_statement = """
+            This content is available under a <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/"> 
+                Creative Commons CC0</a> license.
+        """
+        scholia_credit_statement = """
+        SPARQL queries adapted from <a target="_blank" href="https://scholia.toolforge.org/">Scholia</a>
+        """
+
+        creator_statement = """
+        Dashboard  generated via <a target="_blank" href="https://pypi.org/project/wbib/">Wikidata Bib</a>
+        """
 
     html = (
         render_header(site_title)
         + render_top(site_title, site_subtitle)
-        + render_sections(sections_to_add, query_options, config)
+        + render_sections(sections_to_add, query_options, info, mode)
         + """
   </p>
   </div>

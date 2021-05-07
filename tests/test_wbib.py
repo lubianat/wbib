@@ -46,3 +46,19 @@ class TestWbib(unittest.TestCase):
 
         assert "Advanced Wikidata Bib" in html
 
+    def test_basic_rendering(self):
+        qids = ["Q35185544", "Q34555562", "Q21284234"]
+
+        html = advanced.render_dashboard(info=qids, mode="basic")
+        assert "Demonstration" in html
+        with open("tests/basic.html", "w") as f:
+            f.write(html)
+
+    def test_error_in_advanced_rendering(self):
+        qids = ["Q35185544", "Q34555562", "Q21284234"]
+        with self.assertRaises(TypeError):
+            with open("tests/config.yaml") as f2:
+                config = yaml.load(f2, Loader=yaml.FullLoader)
+
+            html = advanced.render_dashboard(qids)
+
