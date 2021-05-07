@@ -2,7 +2,7 @@
 
 """Tests for `wbib` package."""
 import unittest
-from wbib import wbib, queries, advanced
+from wbib import wbib, queries
 import yaml
 
 
@@ -25,7 +25,7 @@ class TestWbib(unittest.TestCase):
     def test_format_with_prefix(self):
         qids = ["Q35185544", "Q34555562", "Q21284234"]
         result = "{ wd:Q35185544 wd:Q34555562 wd:Q21284234 }"
-        test = wbib.format_with_prefix(qids)
+        test = queries.format_with_prefix(qids)
         assert result == test
 
     def test_doi_to_qid(self):
@@ -39,7 +39,7 @@ class TestWbib(unittest.TestCase):
         with open("tests/config.yaml") as f2:
             config = yaml.load(f2, Loader=yaml.FullLoader)
 
-        html = advanced.render_dashboard(config)
+        html = wbib.render_dashboard(config, mode="advanced")
 
         with open("tests/advanced.html", "w") as f:
             f.write(html)
@@ -49,7 +49,7 @@ class TestWbib(unittest.TestCase):
     def test_basic_rendering(self):
         qids = ["Q35185544", "Q34555562", "Q21284234"]
 
-        html = advanced.render_dashboard(info=qids, mode="basic")
+        html = wbib.render_dashboard(info=qids, mode="basic")
         assert "Demonstration" in html
         with open("tests/basic.html", "w") as f:
             f.write(html)
@@ -60,5 +60,5 @@ class TestWbib(unittest.TestCase):
             with open("tests/config.yaml") as f2:
                 config = yaml.load(f2, Loader=yaml.FullLoader)
 
-            html = advanced.render_dashboard(qids)
+            wbib.render_dashboard(qids, mode="advanced")
 

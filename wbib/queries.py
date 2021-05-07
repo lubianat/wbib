@@ -1,11 +1,141 @@
 import urllib.parse
 
 
+def format_with_prefix(list_of_qids):
+
+    list_with_prefix = ["wd:" + i for i in list_of_qids]
+    return "{ " + " ".join(list_with_prefix) + " }"
+
+
+def get_selector(info, mode="advanced"):
+    """
+    The selector that decides the scope of the dashboard. It MUST have the keywords
+    ?work and ?author. 
+    You can override everything here by adapting the query on WDQS:
+    https://w.wiki/3Cmd
+
+    Args:
+        info: either a dict containing complex information for the selector or a list of QIDs
+        mode: a string representing the mode. If "advanced", then a config is expected for the
+          info parameters. If "basic", a list of QIDs is expected. Defaults to "advanced".
+
+    """
+
+    if mode == "advanced":
+        fields_of_work = info["restriction"]["author_area"]
+
+        if fields_of_work is not None:
+            field_of_work_selector = (
+                """
+                VALUES ?field_of_work """
+                + format_with_prefix(fields_of_work)
+                + """
+                ?author wdt:P101 ?field_of_work.
+                """
+            )
+        else:
+            field_of_work_selector = ""
+
+        topic_of_work = info["restriction"]["topic_of_work"]
+
+        if topic_of_work is not None:
+            topic_of_work_selector = (
+                """
+                VALUES ?topics """
+                + format_with_prefix(topic_of_work)
+                + """
+                ?work wdt:P921/wdt:P279* ?topics.
+                """
+            )
+        else:
+            topic_of_work_selector = ""
+
+        region = info["restriction"]["institution_region"]
+
+        if region is not None:
+            region_selector = (
+                """
+                VALUES ?regions """
+                + format_with_prefix(region)
+                + """
+                ?country wdt:P361* ?regions.
+                ?author ( wdt:P108 | wdt:P463 | wdt:P1416 ) / wdt:P361* ?organization . 
+                ?organization wdt:P17 ?country.
+                """
+            )
+        else:
+            region_selector = ""
+
+        gender = info["restriction"]["gender"]
+        if gender is not None:
+            gender_selector = (
+                """
+                VALUES ?gender """
+                + format_with_prefix(gender)
+                + """
+                ?author wdt:P21 ?gender.
+                """
+            )
+        else:
+            gender_selector = ""
+
+        event = info["restriction"]["event"]
+
+        if event is not None:
+
+            # P823 - speaker
+            # P664 - organizer
+            # P1334 - has participant
+            # ^P710 - inverse of (participated in)
+            event_selector = (
+                """
+                VALUES ?event """
+                + format_with_prefix(event)
+                + """
+                ?event wdt:P823 |  wdt:P664 | wdt:P1344 | ^wdt:P710 ?author.
+                """
+            )
+        else:
+            event_selector = ""
+
+        author_is_topic_of = info["restriction"]["author_is_topic_of"]
+
+        if author_is_topic_of is not None:
+            author_is_topic_of_selector = (
+                """
+                VALUES ?biographical_work """
+                + format_with_prefix(author_is_topic_of)
+                + """
+                ?biographical_work wdt:P921 ?author.
+                """
+            )
+        else:
+            author_is_topic_of_selector = ""
+
+        selector = (
+            field_of_work_selector
+            + topic_of_work_selector
+            + region_selector
+            + gender_selector
+            + event_selector
+            + author_is_topic_of_selector
+            + """
+            ?work wdt:P50 ?author.
+            """
+        )
+    else:
+        selector = f"""
+        VALUES ?work {format_with_prefix(info)} .
+        ?work wdt:P50 ?author .
+        """
+    return selector
+
+
 def render_url(query):
     return "https://query.wikidata.org/embed.html#" + urllib.parse.quote(query, safe="")
 
 
-def get_query_url_for_author_without_affiliation(readings):
+def get_query_url_for_author_without_affiliation(info, mode="basic"):
     query = (
         """
 # tool: scholia
@@ -17,9 +147,9 @@ SELECT
   (SAMPLE(?orcid_) AS ?orcid)
 WITH {
   SELECT DISTINCT ?researcher WHERE {
-  VALUES ?work """
-        + readings
-        + """.
+"""
+        + get_selector(info, mode)
+        + """
     ?work wdt:P50 ?researcher.
     
     MINUS {?researcher ( wdt:P108 | wdt:P463 | wdt:P1416 ) / wdt:P361* ?organization .}
@@ -51,7 +181,7 @@ ORDER BY DESC(?works)
     return render_url(query)
 
 
-def get_query_url_for_missing_author_items(readings):
+def get_query_url_for_missing_author_items(info, mode="basic"):
     query = (
         """
   #defaultView:Table
@@ -64,9 +194,9 @@ def get_query_url_for_missing_author_items(readings):
   WHERE {
     {
       SELECT DISTINCT ?author_name {
-        VALUES ?work    """
-        + readings
-        + """.
+    """
+        + get_selector(info, mode)
+        + """
         ?work wdt:P50 ?researcher_. 
         ?researcher_ skos:altLabel | rdfs:label ?author_name_ .
         
@@ -87,7 +217,7 @@ def get_query_url_for_missing_author_items(readings):
     return render_url(query)
 
 
-def get_query_url_for_articles(readings):
+def get_query_url_for_articles(info, mode="basic"):
     query = (
         """
 
@@ -100,9 +230,9 @@ def get_query_url_for_articles(readings):
   ?venue ?venueLabel
   (GROUP_CONCAT(DISTINCT ?author_label; separator=", ") AS ?authors)
   WHERE {
-  VALUES ?work """
-        + readings
-        + """.
+"""
+        + get_selector(info, mode)
+        + """
   ?work wdt:P50 ?author .
   OPTIONAL {
     ?author rdfs:label ?author_label_ . FILTER (LANG(?author_label_) = 'en')
@@ -124,7 +254,7 @@ def get_query_url_for_articles(readings):
     return render_url(query)
 
 
-def get_query_url_for_topic_bubble(readings):
+def get_query_url_for_topic_bubble(info, mode="basic"):
 
     query = (
         """
@@ -138,18 +268,18 @@ def get_query_url_for_topic_bubble(readings):
     WHERE {
           {
         SELECT (100 AS ?score_) ?topic WHERE {
-          VALUES ?work """
-        + readings
-        + """.
+        """
+        + get_selector(info, mode)
+        + """
           ?work  wdt:P921 ?topic . 
         }
       }
       UNION
       {
         SELECT (1 AS ?score_) ?topic WHERE {
-          VALUES ?work """
-        + readings
-        + """.
+        """
+        + get_selector(info, mode)
+        + """
           ?citing_work wdt:P2860 ?work .
           ?citing_work wdt:P921 ?topic . 
         }
@@ -169,7 +299,7 @@ def get_query_url_for_topic_bubble(readings):
     return render_url(query)
 
 
-def get_topics_as_table(readings):
+def get_topics_as_table(info, mode="basic"):
     query_3 = (
         """
 
@@ -179,9 +309,9 @@ def get_topics_as_table(readings):
   WITH {
     SELECT (COUNT(?work) AS ?count) ?theme (SAMPLE(?work) AS ?example_work)
     WHERE {
-      VALUES ?work """
-        + readings
-        + """.
+    """
+        + get_selector(info, mode)
+        + """
       ?work wdt:P921 ?theme .
     }
     GROUP BY ?theme
@@ -197,7 +327,7 @@ def get_topics_as_table(readings):
     return render_url(query_3)
 
 
-def get_query_url_for_venues(readings):
+def get_query_url_for_venues(info, mode="basic"):
     query_4 = (
         """
 
@@ -213,9 +343,9 @@ def get_query_url_for_venues(readings):
       ?venue
       (GROUP_CONCAT(DISTINCT ?topic_label; separator=", ") AS ?topics)
     WHERE {
-      VALUES ?work """
-        + readings
-        + """.
+    """
+        + get_selector(info, mode)
+        + """
       ?work wdt:P1433 ?venue .
       OPTIONAL {
         ?venue wdt:P921 ?topic .
@@ -236,7 +366,7 @@ def get_query_url_for_venues(readings):
     return render_url(query_4)
 
 
-def get_query_url_for_locations(readings):
+def get_query_url_for_locations(info, mode="basic"):
     query_5 = (
         """
 #defaultView:Map
@@ -253,9 +383,9 @@ SELECT
     (SAMPLE(?work) as ?sample_work) 
     (SAMPLE(?author) as ?sample_author) WHERE {
 
-      VALUES ?work """
-        + readings
-        + """.
+    """
+        + get_selector(info, mode)
+        + """
           ?work wdt:P50 ?author .
       ?author ( wdt:P108 | wdt:P463 | wdt:P1416 ) / wdt:P361* ?organization . 
       ?organization wdt:P625 ?geo .
@@ -277,7 +407,7 @@ SELECT
     return render_url(query_5)
 
 
-def get_query_url_for_citing_authors(readings):
+def get_query_url_for_citing_authors(info, mode="basic"):
     query_6 = (
         """
 
@@ -291,9 +421,9 @@ def get_query_url_for_citing_authors(readings):
     (COALESCE(?orcid_, CONCAT("orcid-search/quick-search/?searchQuery=", ENCODE_FOR_URI(?citing_authorLabel))) AS ?orcid)
   WITH {
     SELECT (COUNT(?citing_work) AS ?count) ?citing_author WHERE {
-      VALUES ?work """
-        + readings
-        + """.
+    """
+        + get_selector(info, mode)
+        + """
       ?citing_work wdt:P2860 ?work . 
       ?citing_work wdt:P50 ?citing_author .
     }
@@ -326,14 +456,14 @@ def get_query_url_for_citing_authors(readings):
     return render_url(query_6)
 
 
-def get_query_url_for_authors(readings):
+def get_query_url_for_authors(info, mode="basic"):
     query_7 = (
         """
   #defaultView:Table
   SELECT (COUNT(?work) AS ?count) ?author ?authorLabel ?orcids  WHERE {
-    VALUES ?work """
-        + readings
-        + """.
+  """
+        + get_selector(info, mode)
+        + """
     ?work wdt:P50 ?author .
       OPTIONAL { ?author wdt:P496 ?orcids }
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en,da,de,es,fr,jp,nl,no,ru,sv,zh". }

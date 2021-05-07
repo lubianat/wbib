@@ -59,63 +59,73 @@ DEFAULT_SESSIONS = [
 
 
 def render_dashboard(
-    qids_for_articles,
-    site_title="Wikidata Bibtex",
-    site_subtitle="Demonstration",
+    info,
+    mode="basic",
     query_options=DEFAULT_QUERY_OPTIONS,
     sections_to_add=DEFAULT_SESSIONS,
+    site_title="Wikidata Bibtex",
+    site_subtitle="Demonstration",
 ):
     """
-  Crafts the html for a default Wikidata-based dashboard.
-
-  Args:
-    qids_for_articles: 
-      An array of Wikidata Qids (Q[0-9]*) for scholarly works       
-    site_title:
-      The title of the dashboard
-    site_subtitle:
-      An explaining subtitle for the dashboard
-    query_options:
-      A dict containing the different SPARQL query options for the dashboard
-    sections_to_add:
-      A list with the keys for the sessions to keep from the query_options dict
-
-  Returns:
-    An html document as an string. 
-
+    Args:
+        info: either a dict containing complex information for the selector or a list of QIDs
+        mode: a string representing the mode. If "advanced", then a config is expected for the
+          info parameters. If "basic", a list of QIDs is expected. Defaults to "advanced".
   """
 
-    license_statement = """
-    This content is available under a <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/"> 
-          Creative Commons CC0</a> license.
-  """
-    scholia_credit_statement = """
-  SPARQL queries adapted from <a target="_blank" href="https://scholia.toolforge.org/">Scholia</a>
-  """
+    if mode == "advanced":
+        if not isinstance(info, dict):
+            raise TypeError(
+                "In advanced mode, 'info' needs to be a dict obtained from the standard yaml file"
+            )
+        else:
+            license_statement = info["license_statement"]
+            scholia_credit_statement = info["scholia_credit"]
+            creator_statement = info["creator_credit"]
+            site_title = info["title"]
+            site_subtitle = info["subtitle"]
 
-    creator_statement = """
-  Dashboard  generated via <a target="_blank" href="https://pypi.org/project/wbib/">Wikidata Bib</a>
-  """
+    if mode == "basic":
+        license_statement = """
+            This content is available under a <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/"> 
+                Creative Commons CC0</a> license.
+        """
+        scholia_credit_statement = """
+        SPARQL queries adapted from <a target="_blank" href="https://scholia.toolforge.org/">Scholia</a>
+        """
+
+        creator_statement = """
+        Dashboard  generated via <a target="_blank" href="https://pypi.org/project/wbib/">Wikidata Bib</a>
+        """
 
     html = (
         render.render_header(site_title)
         + render.render_top(site_title, site_subtitle)
-        + render.render_sections(sections_to_add, query_options, qids_for_articles)
-        + f"""
-    </p>
-    </div>
-  </br>
-    <footer class="footer">
-      <div class="container">
-        <div class="content has-text-centered">
-          <p>{license_statement}</p>
-          <p>{scholia_credit_statement}</p>
-          <p>{creator_statement}</p>
-        </div>
+        + render.render_sections(sections_to_add, query_options, info, mode)
+        + """
+  </p>
+  </div>
+ </br>
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>"""
+        + license_statement
+        + """  </p>def format_with_prefix(list_of_qids):
+
+    list_with_prefix = ["wd:" + i for i in list_of_qids]
+    return "{ " + " ".join(list_with_prefix) + " }"
+        <p>"""
+        + scholia_credit_statement
+        + """</p>
+        <p>"""
+        + creator_statement
+        + """ </p>
       </div>
-    </footer>
-  </body>
-  </html>
+    </div>
+  </footer>
+</body>
+</html>
   """
     )
     return html
@@ -165,8 +175,3 @@ def convert_doi_to_qid(list_of_dois):
     result["qids"] = set(result["qids"])
     result["missing"] = set(result["missing"])
     return result
-
-
-def format_with_prefix(list_of_qids):
-    list_with_prefix = ["wd:" + i for i in list_of_qids]
-    return "{ " + " ".join(list_with_prefix) + " }"
