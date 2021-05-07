@@ -111,10 +111,7 @@ def render_dashboard(
       <div class="content has-text-centered">
         <p>"""
         + license_statement
-        + """  </p>def format_with_prefix(list_of_qids):
-
-    list_with_prefix = ["wd:" + i for i in list_of_qids]
-    return "{ " + " ".join(list_with_prefix) + " }"
+        + """</p>
         <p>"""
         + scholia_credit_statement
         + """</p>
