@@ -2,7 +2,8 @@
 
 """Tests for `wbib` package."""
 import unittest
-from wbib import wbib, queries
+from wbib import wbib, queries, advanced
+import yaml
 
 
 class TestWbib(unittest.TestCase):
@@ -33,4 +34,15 @@ class TestWbib(unittest.TestCase):
         test = wbib.convert_doi_to_qid(dois)
         assert result["missing"] == test["missing"]
         assert result["qids"] == test["qids"]
+
+    def test_advanced_rendering(self):
+        with open("tests/config.yaml") as f2:
+            config = yaml.load(f2, Loader=yaml.FullLoader)
+
+        html = advanced.render_dashboard(config)
+
+        with open("tests/advanced.html", "w") as f:
+            f.write(html)
+
+        assert "Advanced Wikidata Bib" in html
 
