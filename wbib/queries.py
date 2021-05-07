@@ -143,37 +143,36 @@ def get_query_url_for_author_without_affiliation(info, mode="basic"):
 SELECT
   (SAMPLE(?number_of_works_) AS ?works)
   (SAMPLE(?wikis_) AS ?wikis)
-  ?researcher ?researcherLabel ?researcherDescription
+  ?author ?authorLabel ?authorDescription
   (SAMPLE(?orcid_) AS ?orcid)
 WITH {
-  SELECT DISTINCT ?researcher WHERE {
+  SELECT DISTINCT ?author WHERE {
 """
         + get_selector(info, mode)
         + """
-    ?work wdt:P50 ?researcher.
     
-    MINUS {?researcher ( wdt:P108 | wdt:P463 | wdt:P1416 ) / wdt:P361* ?organization .}
+    MINUS {?author ( wdt:P108 | wdt:P463 | wdt:P1416 ) / wdt:P361* ?organization .}
   } 
-} AS %researchers
+} AS %authors
 WITH {
   SELECT
-    (COUNT(?work) AS ?number_of_works_) ?researcher
+    (COUNT(?work) AS ?number_of_works_) ?author
   WHERE {
-    INCLUDE %researchers
-    OPTIONAL { ?work wdt:P50 ?researcher . }
+    INCLUDE %authors
+    OPTIONAL { ?work wdt:P50 ?author . }
 
     # No biological pathways; they skew the statistics too much 
     MINUS { ?work wdt:P31 wd:Q4915012 } 
   } 
-  GROUP BY ?researcher
-} AS %researchers_and_number_of_works
+  GROUP BY ?author
+} AS %authors_and_number_of_works
 WHERE {
-  INCLUDE %researchers_and_number_of_works
-  OPTIONAL { ?researcher wdt:P496 ?orcid_ . }
-  OPTIONAL { ?researcher wikibase:sitelinks ?wikis_ }
+  INCLUDE %authors_and_number_of_works
+  OPTIONAL { ?author wdt:P496 ?orcid_ . }
+  OPTIONAL { ?author wikibase:sitelinks ?wikis_ }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en,da,de,es,fr,nl,no,ru,sv,zh" . } 
 }
-GROUP BY ?researcher ?researcherLabel ?researcherDescription 
+GROUP BY ?author ?authorLabel ?authorDescription 
 ORDER BY DESC(?works)
   """
     )
@@ -188,17 +187,17 @@ def get_query_url_for_missing_author_items(info, mode="basic"):
   SELECT
     (COUNT(?work) AS ?count) 
     ?author_name
-    (CONCAT(
+    (URI(CONCAT(
         'https://author-disambiguator.toolforge.org/names_oauth.php?doit=Look+for+author&name=',
-        ENCODE_FOR_URI(?author_name)) AS ?author_resolver_url)
+        ENCODE_FOR_URI(?author_name))) AS ?author_resolver_url)
   WHERE {
     {
       SELECT DISTINCT ?author_name {
     """
         + get_selector(info, mode)
         + """
-        ?work wdt:P50 ?researcher_. 
-        ?researcher_ skos:altLabel | rdfs:label ?author_name_ .
+        ?work wdt:P50 ?author . 
+        ?author skos:altLabel | rdfs:label ?author_name_ .
         
         # The SELECT-DISTINCT-BIND trick here is due to Stanislav Kralin
         # https://stackoverflow.com/questions/53933564
