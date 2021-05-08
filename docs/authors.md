@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* Tiago Lubiana <tiago.lubiana.alves@usp.br>
+* Tiago Lubiana (lubianat)
 
 Contributors
 ------------

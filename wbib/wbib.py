@@ -70,10 +70,67 @@ def render_dashboard(
     site_subtitle="Demonstration",
 ):
     """
+    Renders a plain html string coding for a dashboard with embedded Wikidata SPARQL queries.
+
+
+    ```
+    DEFAULT_SESSIONS = [
+        "map of institutions",
+        "articles",
+        "list of authors",
+        "list of topics",
+        "list of journals",
+        "curation of author items",
+        "curation of author affiliations",
+    ]
+    ```
+
+    ```
+    DEFAULT_QUERY_OPTIONS = {
+        "map of institutions": {
+            "label": "map of institutions",
+            "query": wbib.queries.get_query_url_for_locations
+        },
+        "articles": {
+            "label": "articles",
+            "query": wbib.queries.get_query_url_for_articles
+        },
+        "list of authors": {
+            "label": "list of authors",
+            "query": wbib.queries.get_query_url_for_authors
+        },
+        "list of topics": {
+            "label": "list of co-studied topics",
+            "query": wbib.queries.get_topics_as_table
+        },
+        "list of journals": {
+            "label": "list of venues",
+            "query": wbib.queries.get_query_url_for_venues
+        },
+        "curation of author items": {
+            "label": "curation: curate author strings that are not yet linked to items",
+            "query": wbib.queries.get_query_url_for_missing_author_items
+        },
+        "curation of author affiliations": {
+            "label": "curation: add affiliation/employment for authors lacking it",
+            "query": queries.get_query_url_for_author_without_affiliation
+        }
+    }
+    ```
+
     Args:
-        info: either a dict containing complex information for the selector or a list of QIDs
-        mode: a string representing the mode. If "advanced", then a config is expected for the
-          info parameters. If "basic", a list of QIDs is expected. Defaults to "advanced".
+        info (dict): Either a dict containing complex information for the selector or a list of QIDs.
+        mode (str): A string representing the mode. If "advanced", then a config is expected for the
+            info parameters. If "basic", a list of QIDs is expected. Defaults to "advanced".
+        query_options (dict): A set of queries that might be used by the dashboard.
+            See default for customizing queries or labels.
+        sections_to_add (list): Names of the queries to be included in the dashboard.
+            Standard is to include all.
+        site_title (str): A title for the dashboard (if in "basic" mode)
+        site_subtitle (str): A subtitle for the dashboard (if in "basic" mode)
+
+    Returns:
+        str: The html content for a static Wikidata-based dashboard.
     """
 
     if mode == "advanced":
@@ -150,13 +207,11 @@ def convert_doi_to_qid(list_of_dois):
     Converts a list of DOI ids to Wikidata QIDs.
 
     Args:
-      list_of_dois:
-        A list of dois without prefix. For example:
+      list_of_dois (list): DOIs without prefix. For example:
         ["10.3897/RIO.2.E9342", "10.3389/fimmu.2019.02736"]
 
     Returns:
-      result:
-          A dict with two key-value pairs. The "missing" key contains a set
+      dict: A dict with two key-value pairs. The "missing" key contains a set
           with the DOIs not found, the "qids" key contain a set with the
           QIDs found on Wikidata.
     """

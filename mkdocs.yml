@@ -1,0 +1,20 @@
+site_name: wbib
+site_description: Python framework to render Wikidata-based science dashboard
+site_author: lubianat
+site_url: https://lubianat.github.io/wbib/
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Reference:
+    - Main module: reference/wbib.md
+  - About: about.md
+  - History: history.md
+  - Contributing: 
+    - Contribution guide: contributing.md
+    - Contributors: authors.md
+repo_url: https://github.com/lubianat/wbib
+theme:
+  name: rtd-dropdown
+plugins:
+  - search
+  - mkdocstrings
