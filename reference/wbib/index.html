@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="lubianat">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Main module - wbib</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../assets/_mkdocstrings.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Main module";
+    var mkdocs_page_input_path = "reference/wbib.md";
+    var mkdocs_page_url = "/wbib/reference/wbib/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> wbib</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../..">Home</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../installation/">Installation</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Examples</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../examples/basic/">Basic</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Reference</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  
+    
+    <li class="navtree toctree-l2 page current">
+      <a class="current" href="./">
+        Main module
+          <span class="toctree-expand"></span>
+      </a>
+    </li>
+    
+      
+
+  <li class="toctree-l2 current with-children">
+    <a href="#wbibwbib">
+      wbib.wbib
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#wbib.wbib.render_dashboard">wbib.wbib.render_dashboard</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#wbib.wbib.convert_doi_to_qid">wbib.wbib.convert_doi_to_qid</a>
+        </li>
+    
+    </ul>
+  </li>
+
+
+  
+        
+      </ul>
+    </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../about/">About</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../../history/">History</a>
+  </li>
+    
+      
+  <li class="navtree toctree-l1 label">
+    <p class="caption">Contributing</p>
+  </li>
+
+
+  
+
+  
+    <li class="navtree toctree-l1 group">
+      <ul class="navtree subnav-l1 current">
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../contributing/">Contribution guide</a>
+  </li>
+        
+          
+
+
+  <li class="navtree toctree-l2 inactive">
+    <a class="" href="../../authors/">Contributors</a>
+  </li>
+        
+      </ul>
+    </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">wbib</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>Main module</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/lubianat/wbib/edit/master/docs/reference/wbib.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="wbibwbib">wbib.wbib</h1>
+<p>A set of core functions that may be called from wbib.
+Other modules will contain the specific queries and auxiliary functions.</p>
+<p>Typical usage example:</p>
+<pre><code class="language-python">    qids = [&quot;Q35185544&quot;, &quot;Q34555562&quot;, &quot;Q21284234&quot;]
+</code></pre>
+<pre><code>    render_dashboard(info=qids, mode=&quot;basic&quot;)
+</code></pre>
+<p><strong>render_dashboard()</strong></p>
+
+
+  <div class="doc doc-object doc-function">
+
+<a id="wbib.wbib.render_dashboard"></a>
+    <div class="doc doc-contents first">
+
+      <p>Renders a plain html string coding for a dashboard with embedded Wikidata SPARQL queries.</p>
+<pre><code>DEFAULT_SESSIONS = [
+    &quot;map of institutions&quot;,
+    &quot;articles&quot;,
+    &quot;list of authors&quot;,
+    &quot;list of topics&quot;,
+    &quot;list of journals&quot;,
+    &quot;curation of author items&quot;,
+    &quot;curation of author affiliations&quot;,
+]
+</code></pre>
+<pre><code>DEFAULT_QUERY_OPTIONS = {
+    &quot;map of institutions&quot;: {
+        &quot;label&quot;: &quot;map of institutions&quot;,
+        &quot;query&quot;: wbib.queries.get_query_url_for_locations
+    },
+    &quot;articles&quot;: {
+        &quot;label&quot;: &quot;articles&quot;,
+        &quot;query&quot;: wbib.queries.get_query_url_for_articles
+    },
+    &quot;list of authors&quot;: {
+        &quot;label&quot;: &quot;list of authors&quot;,
+        &quot;query&quot;: wbib.queries.get_query_url_for_authors
+    },
+    &quot;list of topics&quot;: {
+        &quot;label&quot;: &quot;list of co-studied topics&quot;,
+        &quot;query&quot;: wbib.queries.get_topics_as_table
+    },
+    &quot;list of journals&quot;: {
+        &quot;label&quot;: &quot;list of venues&quot;,
+        &quot;query&quot;: wbib.queries.get_query_url_for_venues
+    },
+    &quot;curation of author items&quot;: {
+        &quot;label&quot;: &quot;curation: curate author strings that are not yet linked to items&quot;,
+        &quot;query&quot;: wbib.queries.get_query_url_for_missing_author_items
+    },
+    &quot;curation of author affiliations&quot;: {
+        &quot;label&quot;: &quot;curation: add affiliation/employment for authors lacking it&quot;,
+        &quot;query&quot;: queries.get_query_url_for_author_without_affiliation
+    }
+}
+</code></pre>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>info</code></td>
+        <td><code>dict</code></td>
+        <td><p>Either a dict containing complex information for the selector or a list of QIDs.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>mode</code></td>
+        <td><code>str</code></td>
+        <td><p>A string representing the mode. If "advanced", then a config is expected for the
+info parameters. If "basic", a list of QIDs is expected. Defaults to "advanced".</p></td>
+        <td><code>&#39;basic&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>query_options</code></td>
+        <td><code>dict</code></td>
+        <td><p>A set of queries that might be used by the dashboard.
+See default for customizing queries or labels.</p></td>
+        <td><code>{&#39;map of institutions&#39;: {&#39;label&#39;: &#39;map of institutions&#39;, &#39;query&#39;: &lt;function get_query_url_for_locations at 0x7fdf004b4730&gt;}, &#39;articles&#39;: {&#39;label&#39;: &#39;articles&#39;, &#39;query&#39;: &lt;function get_query_url_for_articles at 0x7fdf004b4510&gt;}, &#39;list of authors&#39;: {&#39;label&#39;: &#39;list of authors&#39;, &#39;query&#39;: &lt;function get_query_url_for_authors at 0x7fdf004b4840&gt;}, &#39;list of topics&#39;: {&#39;label&#39;: &#39;list of co-studied topics&#39;, &#39;query&#39;: &lt;function get_topics_as_table at 0x7fdf004b4620&gt;}, &#39;list of journals&#39;: {&#39;label&#39;: &#39;list of venues&#39;, &#39;query&#39;: &lt;function get_query_url_for_venues at 0x7fdf004b46a8&gt;}, &#39;curation of author items&#39;: {&#39;label&#39;: &#39;curation: curate author strings that are not yet linked to items&#39;, &#39;query&#39;: &lt;function get_query_url_for_missing_author_items at 0x7fdf004b4488&gt;}, &#39;curation of author affiliations&#39;: {&#39;label&#39;: &#39;curation: add affiliation/employment for authors lacking it&#39;, &#39;query&#39;: &lt;function get_query_url_for_author_without_affiliation at 0x7fdf004b4400&gt;}}</code></td>
+      </tr>
+      <tr>
+        <td><code>sections_to_add</code></td>
+        <td><code>list</code></td>
+        <td><p>Names of the queries to be included in the dashboard.
+Standard is to include all.</p></td>
+        <td><code>[&#39;map of institutions&#39;, &#39;articles&#39;, &#39;list of authors&#39;, &#39;list of topics&#39;, &#39;list of journals&#39;, &#39;curation of author items&#39;, &#39;curation of author affiliations&#39;]</code></td>
+      </tr>
+      <tr>
+        <td><code>site_title</code></td>
+        <td><code>str</code></td>
+        <td><p>A title for the dashboard (if in "basic" mode)</p></td>
+        <td><code>&#39;Wikidata Bibtex&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>site_subtitle</code></td>
+        <td><code>str</code></td>
+        <td><p>A subtitle for the dashboard (if in "basic" mode)</p></td>
+        <td><code>&#39;Demonstration&#39;</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>The html content for a static Wikidata-based dashboard.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wbib/wbib.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">render_dashboard</span><span class="p">(</span>
+    <span class="n">info</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;basic&quot;</span><span class="p">,</span>
+    <span class="n">query_options</span><span class="o">=</span><span class="n">DEFAULT_QUERY_OPTIONS</span><span class="p">,</span>
+    <span class="n">sections_to_add</span><span class="o">=</span><span class="n">DEFAULT_SESSIONS</span><span class="p">,</span>
+    <span class="n">site_title</span><span class="o">=</span><span class="s2">&quot;Wikidata Bibtex&quot;</span><span class="p">,</span>
+    <span class="n">site_subtitle</span><span class="o">=</span><span class="s2">&quot;Demonstration&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders a plain html string coding for a dashboard with embedded Wikidata SPARQL queries.</span>
+
+
+<span class="sd">    ```</span>
+<span class="sd">    DEFAULT_SESSIONS = [</span>
+<span class="sd">        &quot;map of institutions&quot;,</span>
+<span class="sd">        &quot;articles&quot;,</span>
+<span class="sd">        &quot;list of authors&quot;,</span>
+<span class="sd">        &quot;list of topics&quot;,</span>
+<span class="sd">        &quot;list of journals&quot;,</span>
+<span class="sd">        &quot;curation of author items&quot;,</span>
+<span class="sd">        &quot;curation of author affiliations&quot;,</span>
+<span class="sd">    ]</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    ```</span>
+<span class="sd">    DEFAULT_QUERY_OPTIONS = {</span>
+<span class="sd">        &quot;map of institutions&quot;: {</span>
+<span class="sd">            &quot;label&quot;: &quot;map of institutions&quot;,</span>
+<span class="sd">            &quot;query&quot;: wbib.queries.get_query_url_for_locations</span>
+<span class="sd">        },</span>
+<span class="sd">        &quot;articles&quot;: {</span>
+<span class="sd">            &quot;label&quot;: &quot;articles&quot;,</span>
+<span class="sd">            &quot;query&quot;: wbib.queries.get_query_url_for_articles</span>
+<span class="sd">        },</span>
+<span class="sd">        &quot;list of authors&quot;: {</span>
+<span class="sd">            &quot;label&quot;: &quot;list of authors&quot;,</span>
+<span class="sd">            &quot;query&quot;: wbib.queries.get_query_url_for_authors</span>
+<span class="sd">        },</span>
+<span class="sd">        &quot;list of topics&quot;: {</span>
+<span class="sd">            &quot;label&quot;: &quot;list of co-studied topics&quot;,</span>
+<span class="sd">            &quot;query&quot;: wbib.queries.get_topics_as_table</span>
+<span class="sd">        },</span>
+<span class="sd">        &quot;list of journals&quot;: {</span>
+<span class="sd">            &quot;label&quot;: &quot;list of venues&quot;,</span>
+<span class="sd">            &quot;query&quot;: wbib.queries.get_query_url_for_venues</span>
+<span class="sd">        },</span>
+<span class="sd">        &quot;curation of author items&quot;: {</span>
+<span class="sd">            &quot;label&quot;: &quot;curation: curate author strings that are not yet linked to items&quot;,</span>
+<span class="sd">            &quot;query&quot;: wbib.queries.get_query_url_for_missing_author_items</span>
+<span class="sd">        },</span>
+<span class="sd">        &quot;curation of author affiliations&quot;: {</span>
+<span class="sd">            &quot;label&quot;: &quot;curation: add affiliation/employment for authors lacking it&quot;,</span>
+<span class="sd">            &quot;query&quot;: queries.get_query_url_for_author_without_affiliation</span>
+<span class="sd">        }</span>
+<span class="sd">    }</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        info (dict): Either a dict containing complex information for the selector or a list of QIDs.</span>
+<span class="sd">        mode (str): A string representing the mode. If &quot;advanced&quot;, then a config is expected for the</span>
+<span class="sd">            info parameters. If &quot;basic&quot;, a list of QIDs is expected. Defaults to &quot;advanced&quot;.</span>
+<span class="sd">        query_options (dict): A set of queries that might be used by the dashboard.</span>
+<span class="sd">            See default for customizing queries or labels.</span>
+<span class="sd">        sections_to_add (list): Names of the queries to be included in the dashboard.</span>
+<span class="sd">            Standard is to include all.</span>
+<span class="sd">        site_title (str): A title for the dashboard (if in &quot;basic&quot; mode)</span>
+<span class="sd">        site_subtitle (str): A subtitle for the dashboard (if in &quot;basic&quot; mode)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The html content for a static Wikidata-based dashboard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;advanced&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;In advanced mode, &#39;info&#39; needs to be a dict obtained from the standard yaml file&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">license_statement</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;license_statement&quot;</span><span class="p">]</span>
+            <span class="n">scholia_credit_statement</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;scholia_credit&quot;</span><span class="p">]</span>
+            <span class="n">creator_statement</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;creator_credit&quot;</span><span class="p">]</span>
+            <span class="n">site_title</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span>
+            <span class="n">site_subtitle</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;subtitle&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;basic&quot;</span><span class="p">:</span>
+        <span class="n">license_statement</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            This content is available under a &lt;a target=&quot;_blank&quot; href=&quot;https://creativecommons.org/publicdomain/zero/1.0/&quot;&gt; </span>
+<span class="s2">                Creative Commons CC0&lt;/a&gt; license.</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="n">scholia_credit_statement</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        SPARQL queries adapted from &lt;a target=&quot;_blank&quot; href=&quot;https://scholia.toolforge.org/&quot;&gt;Scholia&lt;/a&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="n">creator_statement</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        Dashboard  generated via &lt;a target=&quot;_blank&quot; href=&quot;https://pypi.org/project/wbib/&quot;&gt;Wikidata Bib&lt;/a&gt;</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+
+    <span class="n">additional_curation_statement</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        &lt;h4&gt; Want improve Wikidata-powered science dashboards? &lt;/h4&gt;</span>
+<span class="s2">        &lt;ul style=&quot;display: inline-block; text-align: left&quot;&gt;</span>
+<span class="s2">            &lt;li&gt; Check Laura Dupuis&#39; &lt;a target=&quot;_blank&quot; href=&quot;https://laurendupuis.github.io/Scholia_tutorial/&quot;&gt;Tutorial&lt;/a&gt; for beginners &lt;/li&gt;</span>
+<span class="s2">            &lt;li&gt; Add articles to Wikidata via &lt;a href=&quot;https://sourcemd.toolforge.org/index_old.php&quot;&gt; SourceMD &lt;/a&gt; (needs 4-day account)&lt;/li&gt; </span>
+<span class="s2">            &lt;li&gt; Batch add topics via &lt;a target=&quot;_blank&quot; href=&quot;https://lubianat.shinyapps.io/topictagger/&quot;&gt; TopicTagger &lt;/a&gt; (needs 4-day account)&lt;/li&gt;</span>
+<span class="s2">        &lt;/ul&gt;</span>
+
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">html</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">render</span><span class="o">.</span><span class="n">render_header</span><span class="p">(</span><span class="n">site_title</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">render</span><span class="o">.</span><span class="n">render_top</span><span class="p">(</span><span class="n">site_title</span><span class="p">,</span> <span class="n">site_subtitle</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">render</span><span class="o">.</span><span class="n">render_sections</span><span class="p">(</span><span class="n">sections_to_add</span><span class="p">,</span> <span class="n">query_options</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">  &lt;/p&gt;</span>
+<span class="s2">  &lt;/div&gt;</span>
+<span class="s2"> &lt;/br&gt;</span>
+<span class="s2">  &lt;footer class=&quot;footer&quot;&gt;</span>
+<span class="s2">    &lt;div class=&quot;container&quot;&gt;</span>
+<span class="s2">      &lt;div class=&quot;content has-text-centered&quot;&gt;&quot;&quot;&quot;</span>
+        <span class="o">+</span> <span class="n">additional_curation_statement</span>
+        <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        &lt;br&gt;&lt;/br&gt;</span>
+<span class="s2">        &lt;h4&gt; Credits &lt;/h4&gt;</span>
+<span class="s2">        &lt;p&gt;&quot;&quot;&quot;</span>
+        <span class="o">+</span> <span class="n">license_statement</span>
+        <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&lt;/p&gt;</span>
+<span class="s2">        &lt;p&gt;&quot;&quot;&quot;</span>
+        <span class="o">+</span> <span class="n">scholia_credit_statement</span>
+        <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&lt;/p&gt;</span>
+<span class="s2">        &lt;p&gt;&quot;&quot;&quot;</span>
+        <span class="o">+</span> <span class="n">creator_statement</span>
+        <span class="o">+</span> <span class="s2">&quot;&quot;&quot; &lt;/p&gt; </span>
+<span class="s2">      &lt;/div&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">  &lt;/footer&gt;</span>
+<span class="s2">&lt;/body&gt;</span>
+<span class="s2">&lt;/html&gt;</span>
+<span class="s2">  &quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">html</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+<p><strong>convert_doi_to_qid()</strong></p>
+
+
+  <div class="doc doc-object doc-function">
+
+<a id="wbib.wbib.convert_doi_to_qid"></a>
+    <div class="doc doc-contents first">
+
+      <p>Converts a list of DOI ids to Wikidata QIDs.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>list_of_dois</code></td>
+        <td><code>list</code></td>
+        <td><p>DOIs without prefix. For example:
+["10.3897/RIO.2.E9342", "10.3389/fimmu.2019.02736"]</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>dict</code></td>
+      <td><p>A dict with two key-value pairs. The "missing" key contains a set
+    with the DOIs not found, the "qids" key contain a set with the
+    QIDs found on Wikidata.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>wbib/wbib.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">convert_doi_to_qid</span><span class="p">(</span><span class="n">list_of_dois</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a list of DOI ids to Wikidata QIDs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      list_of_dois (list): DOIs without prefix. For example:</span>
+<span class="sd">        [&quot;10.3897/RIO.2.E9342&quot;, &quot;10.3389/fimmu.2019.02736&quot;]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      dict: A dict with two key-value pairs. The &quot;missing&quot; key contains a set</span>
+<span class="sd">          with the DOIs not found, the &quot;qids&quot; key contain a set with the</span>
+<span class="sd">          QIDs found on Wikidata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">formatted_dois</span> <span class="o">=</span> <span class="s1">&#39;{ &quot;&#39;</span> <span class="o">+</span> <span class="s1">&#39;&quot; &quot;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">list_of_dois</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot;}&#39;</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;SELECT ?id ?item  ?itemLabel</span>
+<span class="s2">  WHERE </span><span class="se">{{</span><span class="s2"></span>
+<span class="s2">      </span><span class="se">{{</span><span class="s2"></span>
+<span class="s2">      SELECT ?item ?id WHERE </span><span class="se">{{</span><span class="s2"></span>
+<span class="s2">          VALUES ?unformatted_id </span><span class="si">{</span><span class="n">formatted_dois</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">          BIND(UCASE(?unformatted_id) AS ?id)</span>
+<span class="s2">          ?item wdt:P356 ?id.</span>
+<span class="s2">      </span><span class="se">}}</span><span class="s2"></span>
+<span class="s2">      </span><span class="se">}}</span><span class="s2"></span>
+<span class="s2">      SERVICE wikibase:label </span>
+<span class="s2">      </span><span class="se">{{</span><span class="s2"> bd:serviceParam wikibase:language &quot;[AUTO_LANGUAGE],en&quot;. </span><span class="se">}}}}</span><span class="s2"></span>
+<span class="s2">  &quot;&quot;&quot;</span>
+
+    <span class="n">query_result</span> <span class="o">=</span> <span class="n">wikidata2df</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;qids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">query_result</span><span class="p">[</span><span class="s2">&quot;item&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;missing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">doi</span> <span class="ow">in</span> <span class="n">list_of_dois</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">doi</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">query_result</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;missing&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doi</span><span class="p">)</span>
+
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;qids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;qids&quot;</span><span class="p">])</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;missing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;missing&quot;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../examples/basic/" class="btn btn-neutral" title="Basic"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/lubianat/wbib/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../examples/basic/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../about/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>
