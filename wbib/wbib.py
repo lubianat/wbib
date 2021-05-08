@@ -24,7 +24,10 @@ DEFAULT_QUERY_OPTIONS = {
         "label": "map of institutions",
         "query": queries.get_query_url_for_locations,
     },
-    "articles": {"label": "articles", "query": queries.get_query_url_for_articles,},
+    "articles": {
+        "label": "articles",
+        "query": queries.get_query_url_for_articles,
+    },
     "list of authors": {
         "label": "list of authors",
         "query": queries.get_query_url_for_authors,
@@ -71,7 +74,7 @@ def render_dashboard(
         info: either a dict containing complex information for the selector or a list of QIDs
         mode: a string representing the mode. If "advanced", then a config is expected for the
           info parameters. If "basic", a list of QIDs is expected. Defaults to "advanced".
-  """
+    """
 
     if mode == "advanced":
         if not isinstance(info, dict):
@@ -98,6 +101,16 @@ def render_dashboard(
         Dashboard  generated via <a target="_blank" href="https://pypi.org/project/wbib/">Wikidata Bib</a>
         """
 
+    additional_curation_statement = """
+        <h4> Want improve Wikidata-powered science dashboards? </h4>
+        <ul style="display: inline-block; text-align: left">
+            <li> Check Laura Dupuis' <a target="_blank" href="https://laurendupuis.github.io/Scholia_tutorial/">Tutorial</a> for beginners </li>
+            <li> Add articles to Wikidata via <a href="https://sourcemd.toolforge.org/index_old.php"> SourceMD </a> (needs 4-day account)</li> 
+            <li> Batch add topics via <a target="_blank" href="https://lubianat.shinyapps.io/topictagger/"> TopicTagger </a> (needs 4-day account)</li>
+        </ul>
+        
+    """
+
     html = (
         render.render_header(site_title)
         + render.render_top(site_title, site_subtitle)
@@ -108,7 +121,11 @@ def render_dashboard(
  </br>
   <footer class="footer">
     <div class="container">
-      <div class="content has-text-centered">
+      <div class="content has-text-centered">"""
+        + additional_curation_statement
+        + """
+        <br></br>
+        <h4> Credits </h4>
         <p>"""
         + license_statement
         + """</p>
@@ -117,7 +134,7 @@ def render_dashboard(
         + """</p>
         <p>"""
         + creator_statement
-        + """ </p>
+        + """ </p> 
       </div>
     </div>
   </footer>
@@ -130,19 +147,19 @@ def render_dashboard(
 
 def convert_doi_to_qid(list_of_dois):
     """
-  Converts a list of DOI ids to Wikidata QIDs.
+    Converts a list of DOI ids to Wikidata QIDs.
 
-  Args:
-    list_of_dois: 
-      A list of dois without prefix. For example:  
-      ["10.3897/RIO.2.E9342", "10.3389/fimmu.2019.02736"]
+    Args:
+      list_of_dois:
+        A list of dois without prefix. For example:
+        ["10.3897/RIO.2.E9342", "10.3389/fimmu.2019.02736"]
 
-  Returns:
-    result: 
-        A dict with two key-value pairs. The "missing" key contains a set
-        with the DOIs not found, the "qids" key contain a set with the 
-        QIDs found on Wikidata. 
-  """
+    Returns:
+      result:
+          A dict with two key-value pairs. The "missing" key contains a set
+          with the DOIs not found, the "qids" key contain a set with the
+          QIDs found on Wikidata.
+    """
 
     formatted_dois = '{ "' + '" "'.join(list_of_dois) + '"}'
     query = f"""SELECT ?id ?item  ?itemLabel
