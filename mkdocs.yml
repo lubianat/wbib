@@ -5,6 +5,8 @@ site_url: https://lubianat.github.io/wbib/
 nav:
   - Home: index.md
   - Installation: installation.md
+  - Examples:
+    - Basic: examples/basic.md
   - Reference:
     - Main module: reference/wbib.md
   - About: about.md

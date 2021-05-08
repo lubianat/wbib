@@ -1,16 +1,5 @@
 """ Main functions for the use by end users.
 
-A set of core functions that may be called from wbib.
-Other modules will contain the specific queries and auxiliary functions.
-
-  Typical usage example:
-  
-  qids = ["Q35185544", "Q34555562", "Q21284234"] 
-  render_dashboard(
-    qids_for_articles= qids,
-    site_title="Wikidata Bibtex",
-    site_subtitle="Demonstration")
-
 """
 
 
