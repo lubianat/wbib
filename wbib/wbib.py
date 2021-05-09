@@ -6,7 +6,12 @@
 import pandas as pd
 from wbib import queries, render
 from wikidata2df import wikidata2df
+from jinja2 import Environment, PackageLoader, select_autoescape
 
+env = Environment(
+    loader=PackageLoader("wbib", "templates"),
+    autoescape=select_autoescape(["html", "xml"]),
+)
 
 DEFAULT_QUERY_OPTIONS = {
     "map of institutions": {
@@ -134,61 +139,17 @@ def render_dashboard(
             site_title = info["title"]
             site_subtitle = info["subtitle"]
 
-    if mode == "basic":
-        license_statement = """
-            This content is available under a <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/"> 
-                Creative Commons CC0</a> license.
-        """
-        scholia_credit_statement = """
-        SPARQL queries adapted from <a target="_blank" href="https://scholia.toolforge.org/">Scholia</a>
-        """
+    sections = render.render_sections(sections_to_add, query_options, info, mode)
 
-        creator_statement = """
-        Dashboard  generated via <a target="_blank" href="https://pypi.org/project/wbib/">Wikidata Bib</a>
-        """
-
-    additional_curation_statement = """
-        <h4> Want improve Wikidata-powered science dashboards? </h4>
-        <ul style="display: inline-block; text-align: left">
-            <li> Check Laura Dupuis' <a target="_blank" href="https://laurendupuis.github.io/Scholia_tutorial/">Tutorial</a> for beginners </li>
-            <li> Add articles to Wikidata via <a href="https://sourcemd.toolforge.org/index_old.php"> SourceMD </a> (needs 4-day account)</li> 
-            <li> Batch add topics via <a target="_blank" href="https://lubianat.shinyapps.io/topictagger/"> TopicTagger </a> (needs 4-day account)</li>
-        </ul>
-        
-    """
-
-    html = (
-        render.render_header(site_title)
-        + render.render_top(site_title, site_subtitle)
-        + render.render_sections(sections_to_add, query_options, info, mode)
-        + """
-  </p>
-  </div>
- </br>
-  <footer class="footer">
-    <div class="container">
-      <div class="content has-text-centered">"""
-        + additional_curation_statement
-        + """
-        <br></br>
-        <h4> Credits </h4>
-        <p>"""
-        + license_statement
-        + """</p>
-        <p>"""
-        + scholia_credit_statement
-        + """</p>
-        <p>"""
-        + creator_statement
-        + """ </p> 
-      </div>
-    </div>
-  </footer>
-</body>
-</html>
-  """
+    template = env.get_template("template.html.jinja")
+    rendered_template = template.render(
+        site_title=site_title, site_subtitle=site_subtitle, sections=sections
     )
-    return html
+
+    with open("dashboard.html", "w") as html:
+        html.write(rendered_template)
+
+    return rendered_template
 
 
 def convert_doi_to_qid(list_of_dois):
