@@ -3,6 +3,7 @@
 
 
 import pandas as pd
+from pathlib import Path
 from wbib import queries, render
 from wikidata2df import wikidata2df
 from jinja2 import Environment, PackageLoader
@@ -60,6 +61,7 @@ def render_dashboard(
     sections_to_add=DEFAULT_SESSIONS,
     site_title="Wikidata Bibtex",
     site_subtitle="Demonstration",
+    filepath=".",
 ):
     """
     Renders a plain html string coding for a dashboard with embedded Wikidata SPARQL queries.
@@ -120,6 +122,7 @@ def render_dashboard(
             Standard is to include all.
         site_title (str): A title for the dashboard (if in "basic" mode)
         site_subtitle (str): A subtitle for the dashboard (if in "basic" mode)
+        filepath (str): The filepath to write the dashboard to.
 
     Returns:
         str: The html content for a static Wikidata-based dashboard.
@@ -164,7 +167,12 @@ def render_dashboard(
         creator_statement=creator_statement,
     )
 
-    with open("dashboard.html", "w") as html:
+    filename = "{}.html".format(site_title.lower().strip().replace(" ", "_"))
+    path_to_write = (
+        Path(filepath).joinpath(filename) if filepath is "." else Path(filepath)
+    )
+
+    with open(path_to_write, "w") as html:
         html.write(rendered_template)
 
     return rendered_template

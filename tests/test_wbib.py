@@ -17,9 +17,8 @@ class TestWbib(unittest.TestCase):
 
     def test_if_queries_run(self):
         qids = ["Q35185544", "Q34555562", "Q21284234"]
-        html = wbib.render_dashboard(qids)
-        with open("tests/index.html", "w") as f:
-            f.write(html)
+        html = wbib.render_dashboard(qids, filepath="tests/index.html")
+
         assert "Demonstration" in html
 
     def test_format_with_prefix(self):
@@ -39,20 +38,19 @@ class TestWbib(unittest.TestCase):
         with open("tests/config.yaml") as f2:
             config = yaml.load(f2, Loader=yaml.FullLoader)
 
-        html = wbib.render_dashboard(config, mode="advanced")
-
-        with open("tests/advanced.html", "w") as f:
-            f.write(html)
+        html = wbib.render_dashboard(
+            config, mode="advanced", filepath="tests/advanced.html"
+        )
 
         assert "Advanced Wikidata Bib" in html
 
     def test_basic_rendering(self):
         qids = ["Q35185544", "Q34555562", "Q21284234"]
 
-        html = wbib.render_dashboard(info=qids, mode="basic")
+        html = wbib.render_dashboard(
+            info=qids, mode="basic", filepath="tests/basic.html"
+        )
         assert "Demonstration" in html
-        with open("tests/basic.html", "w") as f:
-            f.write(html)
 
     def test_error_in_advanced_rendering(self):
         qids = ["Q35185544", "Q34555562", "Q21284234"]
@@ -61,4 +59,3 @@ class TestWbib(unittest.TestCase):
                 config = yaml.load(f2, Loader=yaml.FullLoader)
 
             wbib.render_dashboard(qids, mode="advanced")
-
