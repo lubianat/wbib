@@ -70,4 +70,4 @@ html = wbib.render_dashboard(config, mode="advanced", filepath="dashboard.html")
 ```
 
 
-See the results [here]("./advanced/dashbooard.html").
+See the results [here]("./advanced/dashboard.html").
