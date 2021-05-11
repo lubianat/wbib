@@ -3,20 +3,25 @@ site_description: Python framework to render Wikidata-based science dashboard
 site_author: lubianat
 site_url: https://lubianat.github.io/wbib/
 nav:
-  - Home: index.md
-  - Installation: installation.md
-  - Examples:
-    - Basic: examples/basic.md
-  - Reference:
-    - Main module: reference/wbib.md
-  - About: about.md
-  - History: history.md
-  - Contributing: 
-    - Contribution guide: contributing.md
-    - Contributors: authors.md
+    - Home: index.md
+    - Installation: installation.md
+    - Examples:
+          - Basic: examples/basic.md
+          - Advanced: examples/advanced.md
+    - Reference:
+          - Main module: reference/wbib.md
+    - About: about.md
+    - History: history.md
+    - Contributing:
+          - Contribution guide: contributing.md
+          - Contributors: authors.md
 repo_url: https://github.com/lubianat/wbib
 theme:
+<<<<<<< HEAD
   name: readthedocs 
+=======
+    name: readthedocs
+>>>>>>> 4589a06f4e764589a2964ce89945654632c4f082
 plugins:
-  - search
-  - mkdocstrings
+    - search
+    - mkdocstrings

@@ -9,12 +9,6 @@ import yaml
 class TestWbib(unittest.TestCase):
     """Tests for `wbib` package."""
 
-    def setUp(self):
-        """Set up test fixtures, if any."""
-
-    def tearDown(self):
-        """Tear down test fixtures, if any."""
-
     def test_format_with_prefix(self):
         qids = ["Q35185544", "Q34555562", "Q21284234"]
         result = "{ wd:Q35185544 wd:Q34555562 wd:Q21284234 }"
@@ -32,20 +26,19 @@ class TestWbib(unittest.TestCase):
         with open("tests/config.yaml") as f2:
             config = yaml.load(f2, Loader=yaml.FullLoader)
 
-        html = wbib.render_dashboard(config, mode="advanced")
-
-        with open("tests/advanced.html", "w") as f:
-            f.write(html)
+        html = wbib.render_dashboard(
+            config, mode="advanced", filepath="tests/advanced.html"
+        )
 
         assert "Advanced Wikidata Bib" in html
 
     def test_basic_rendering(self):
         qids = ["Q35185544", "Q34555562", "Q21284234"]
 
-        html = wbib.render_dashboard(info=qids, mode="basic")
+        html = wbib.render_dashboard(
+            info=qids, mode="basic", filepath="tests/basic.html"
+        )
         assert "Demonstration" in html
-        with open("tests/basic.html", "w") as f:
-            f.write(html)
 
     def test_error_in_advanced_rendering(self):
         qids = ["Q35185544", "Q34555562", "Q21284234"]

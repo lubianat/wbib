@@ -1,13 +1,9 @@
-=======
-Credits
-=======
+# Credits
 
-Development Lead
-----------------
+## Development Lead
 
-* Tiago Lubiana (lubianat)
+-   Tiago Lubiana (lubianat)
 
-Contributors
-------------
+## Contributors
 
 None yet. Why not be the first?
