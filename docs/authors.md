@@ -6,4 +6,4 @@
 
 ## Contributors
 
--   João Vitor Ferreira Cavalcante ([jvef](https://github.com/jvfe))
+-   João Vitor Ferreira Cavalcante ([jvfe](https://github.com/jvfe))
