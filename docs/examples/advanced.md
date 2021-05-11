@@ -66,7 +66,7 @@ once the file is set, it can serve as an input for the render_dashboard function
 with open("config.yaml") as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
-html = wbib.render_dashboard(config, mode="advanced")
+html = wbib.render_dashboard(config, mode="advanced", filepath="dashboard.html")
 ```
 
 

@@ -65,6 +65,7 @@ def render_dashboard(
 ):
     """
     Renders a plain html string coding for a dashboard with embedded Wikidata SPARQL queries.
+    At the same time, it saves the html to the file system via the filepath argument.
 
 
     ```
@@ -126,6 +127,7 @@ def render_dashboard(
 
     Returns:
         str: The html content for a static Wikidata-based dashboard.
+            Note: also saves the file to the file system.
     """
 
     if mode == "advanced":

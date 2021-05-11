@@ -2,8 +2,8 @@
 
 ## Development Lead
 
--   Tiago Lubiana (lubianat)
+-   Tiago Lubiana ([lubianat](https://github.com/lubianat))
 
 ## Contributors
 
-None yet. Why not be the first?
+-   João Vitor Ferreira Cavalcante ([jvef](https://github.com/jvfe))

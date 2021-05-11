@@ -20,9 +20,6 @@ The output:
 
 ```python
 qids = ["Q35185544", "Q34555562", "Q21284234"]
-html = wbib.render_dashboard(info=qids, mode="basic")
-with open("dashboard.html","w") as f:
-        f.write(html)
+html = wbib.render_dashboard(info=qids, mode="basic", filepath="dashboard.html")
 ```
-
 See results [here](./basic/dashboard.html)

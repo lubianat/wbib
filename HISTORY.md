@@ -1,5 +1,9 @@
 # History
 
+## 0.3.0 (2021-05-11)
+
+-  Change code to use jinja2 templating for rendering html (contribution by @jvfe).
+
 ## 0.2.0 (2021-05-07)
 
 -   Set up "advanced" mode, with yaml template for restricting the query.
