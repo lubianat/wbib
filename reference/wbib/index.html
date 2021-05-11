@@ -7,15 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <meta name="author" content="lubianat">
+  <link rel="canonical" href="https://lubianat.github.io/wbib/reference/wbib/">
   <link rel="shortcut icon" href="../../img/favicon.ico">
   <title>Main module - wbib</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="../../assets/_mkdocstrings.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../../assets/_mkdocstrings.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -26,7 +26,7 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -37,6 +37,7 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href="../.." class="icon icon-home"> wbib</a>
         <div role="search">
@@ -47,145 +48,49 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="tocbase current">
-    
-    
-      
-
-
-  <li class="navtree toctree-l1 inactive">
-    <a class="" href="../..">Home</a>
-  </li>
-    
-      
-
-
-  <li class="navtree toctree-l1 inactive">
-    <a class="" href="../../installation/">Installation</a>
-  </li>
-    
-      
-  <li class="navtree toctree-l1 label">
-    <p class="caption">Examples</p>
-  </li>
-
-
-  
-
-  
-    <li class="navtree toctree-l1 group">
-      <ul class="navtree subnav-l1 current">
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../examples/basic/">Basic</a>
-  </li>
-        
-      </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../installation/">Installation</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/basic/">Basic</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../examples/advanced/">Advanced</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Reference</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Main module</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#wbib.wbib.render_dashboard">wbib.wbib.render_dashboard</a>
     </li>
-    
-      
-  <li class="navtree toctree-l1 label">
-    <p class="caption">Reference</p>
-  </li>
-
-
-  
-
-  
-    <li class="navtree toctree-l1 group">
-      <ul class="navtree subnav-l1 current">
-          
-
-
-  
-    
-    <li class="navtree toctree-l2 page current">
-      <a class="current" href="./">
-        Main module
-          <span class="toctree-expand"></span>
-      </a>
+    <li class="toctree-l2"><a class="reference internal" href="#wbib.wbib.convert_doi_to_qid">wbib.wbib.convert_doi_to_qid</a>
     </li>
-    
-      
-
-  <li class="toctree-l2 current with-children">
-    <a href="#wbibwbib">
-      wbib.wbib
-      <span class="toctree-expand"></span>
-    </a>
-  </li>
-
-
-
-  <li class="toctree-l2 current">
-    <ul class="subnav-l2 current">
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#wbib.wbib.render_dashboard">wbib.wbib.render_dashboard</a>
-        </li>
-    
-      
-        <li class="toctree-l3">
-          <a class="toctree-l4" href="#wbib.wbib.convert_doi_to_qid">wbib.wbib.convert_doi_to_qid</a>
-        </li>
-    
     </ul>
-  </li>
-
-
-  
-        
-      </ul>
-    </li>
-    
-      
-
-
-  <li class="navtree toctree-l1 inactive">
-    <a class="" href="../../about/">About</a>
-  </li>
-    
-      
-
-
-  <li class="navtree toctree-l1 inactive">
-    <a class="" href="../../history/">History</a>
-  </li>
-    
-      
-  <li class="navtree toctree-l1 label">
-    <p class="caption">Contributing</p>
-  </li>
-
-
-  
-
-  
-    <li class="navtree toctree-l1 group">
-      <ul class="navtree subnav-l1 current">
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../contributing/">Contribution guide</a>
-  </li>
-        
-          
-
-
-  <li class="navtree toctree-l2 inactive">
-    <a class="" href="../../authors/">Contributors</a>
-  </li>
-        
-      </ul>
-    </li>
-    
-  </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../history/">History</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Contributing</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../contributing/">Contribution guide</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../authors/">Contributors</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -217,6 +122,7 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -238,7 +144,8 @@ Other modules will contain the specific queries and auxiliary functions.</p>
 <a id="wbib.wbib.render_dashboard"></a>
     <div class="doc doc-contents first">
 
-      <p>Renders a plain html string coding for a dashboard with embedded Wikidata SPARQL queries.</p>
+      <p>Renders a plain html string coding for a dashboard with embedded Wikidata SPARQL queries.
+At the same time, it saves the html to the file system via the filepath argument.</p>
 <pre><code>DEFAULT_SESSIONS = [
     &quot;map of institutions&quot;,
     &quot;articles&quot;,
@@ -281,70 +188,45 @@ Other modules will contain the specific queries and auxiliary functions.</p>
 }
 </code></pre>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li><p><strong>info</strong> (<code>dict</code>) – Either a dict containing complex information for the selector or a list of QIDs.</p></li>
+            <li><p><strong>mode</strong> (<code>str</code>) – A string representing the mode. If "advanced", then a config is expected for the
+info parameters. If "basic", a list of QIDs is expected. Defaults to "advanced".</p></li>
+            <li><p><strong>query_options</strong> (<code>dict</code>) – A set of queries that might be used by the dashboard.
+See default for customizing queries or labels.</p></li>
+            <li><p><strong>sections_to_add</strong> (<code>list</code>) – Names of the queries to be included in the dashboard.
+Standard is to include all.</p></li>
+            <li><p><strong>site_title</strong> (<code>str</code>) – A title for the dashboard (if in "basic" mode)</p></li>
+            <li><p><strong>site_subtitle</strong> (<code>str</code>) – A subtitle for the dashboard (if in "basic" mode)</p></li>
+            <li><p><strong>filepath</strong> (<code>str</code>) – The filepath to write the dashboard to.</p></li>
+        </ul>
+      </td>
     </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>info</code></td>
-        <td><code>dict</code></td>
-        <td><p>Either a dict containing complex information for the selector or a list of QIDs.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>mode</code></td>
-        <td><code>str</code></td>
-        <td><p>A string representing the mode. If "advanced", then a config is expected for the
-info parameters. If "basic", a list of QIDs is expected. Defaults to "advanced".</p></td>
-        <td><code>&#39;basic&#39;</code></td>
-      </tr>
-      <tr>
-        <td><code>query_options</code></td>
-        <td><code>dict</code></td>
-        <td><p>A set of queries that might be used by the dashboard.
-See default for customizing queries or labels.</p></td>
-        <td><code>{&#39;map of institutions&#39;: {&#39;label&#39;: &#39;map of institutions&#39;, &#39;query&#39;: &lt;function get_query_url_for_locations at 0x7fdf004b4730&gt;}, &#39;articles&#39;: {&#39;label&#39;: &#39;articles&#39;, &#39;query&#39;: &lt;function get_query_url_for_articles at 0x7fdf004b4510&gt;}, &#39;list of authors&#39;: {&#39;label&#39;: &#39;list of authors&#39;, &#39;query&#39;: &lt;function get_query_url_for_authors at 0x7fdf004b4840&gt;}, &#39;list of topics&#39;: {&#39;label&#39;: &#39;list of co-studied topics&#39;, &#39;query&#39;: &lt;function get_topics_as_table at 0x7fdf004b4620&gt;}, &#39;list of journals&#39;: {&#39;label&#39;: &#39;list of venues&#39;, &#39;query&#39;: &lt;function get_query_url_for_venues at 0x7fdf004b46a8&gt;}, &#39;curation of author items&#39;: {&#39;label&#39;: &#39;curation: curate author strings that are not yet linked to items&#39;, &#39;query&#39;: &lt;function get_query_url_for_missing_author_items at 0x7fdf004b4488&gt;}, &#39;curation of author affiliations&#39;: {&#39;label&#39;: &#39;curation: add affiliation/employment for authors lacking it&#39;, &#39;query&#39;: &lt;function get_query_url_for_author_without_affiliation at 0x7fdf004b4400&gt;}}</code></td>
-      </tr>
-      <tr>
-        <td><code>sections_to_add</code></td>
-        <td><code>list</code></td>
-        <td><p>Names of the queries to be included in the dashboard.
-Standard is to include all.</p></td>
-        <td><code>[&#39;map of institutions&#39;, &#39;articles&#39;, &#39;list of authors&#39;, &#39;list of topics&#39;, &#39;list of journals&#39;, &#39;curation of author items&#39;, &#39;curation of author affiliations&#39;]</code></td>
-      </tr>
-      <tr>
-        <td><code>site_title</code></td>
-        <td><code>str</code></td>
-        <td><p>A title for the dashboard (if in "basic" mode)</p></td>
-        <td><code>&#39;Wikidata Bibtex&#39;</code></td>
-      </tr>
-      <tr>
-        <td><code>site_subtitle</code></td>
-        <td><code>str</code></td>
-        <td><p>A subtitle for the dashboard (if in "basic" mode)</p></td>
-        <td><code>&#39;Demonstration&#39;</code></td>
-      </tr>
   </tbody>
 </table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>str</code></td>
-      <td><p>The html content for a static Wikidata-based dashboard.</p></td>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+        <ul class="first simple">
+          <li><p><code>str</code> – The html content for a static Wikidata-based dashboard.
+    Note: also saves the file to the file system.</p></li>
+        </ul>
+    </td>
     </tr>
   </tbody>
 </table>
@@ -357,9 +239,11 @@ Standard is to include all.</p></td>
     <span class="n">sections_to_add</span><span class="o">=</span><span class="n">DEFAULT_SESSIONS</span><span class="p">,</span>
     <span class="n">site_title</span><span class="o">=</span><span class="s2">&quot;Wikidata Bibtex&quot;</span><span class="p">,</span>
     <span class="n">site_subtitle</span><span class="o">=</span><span class="s2">&quot;Demonstration&quot;</span><span class="p">,</span>
+    <span class="n">filepath</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders a plain html string coding for a dashboard with embedded Wikidata SPARQL queries.</span>
+<span class="sd">    At the same time, it saves the html to the file system via the filepath argument.</span>
 
 
 <span class="sd">    ```</span>
@@ -417,9 +301,11 @@ Standard is to include all.</p></td>
 <span class="sd">            Standard is to include all.</span>
 <span class="sd">        site_title (str): A title for the dashboard (if in &quot;basic&quot; mode)</span>
 <span class="sd">        site_subtitle (str): A subtitle for the dashboard (if in &quot;basic&quot; mode)</span>
+<span class="sd">        filepath (str): The filepath to write the dashboard to.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The html content for a static Wikidata-based dashboard.</span>
+<span class="sd">            Note: also saves the file to the file system.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;advanced&quot;</span><span class="p">:</span>
@@ -435,10 +321,12 @@ Standard is to include all.</p></td>
             <span class="n">site_subtitle</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;subtitle&quot;</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;basic&quot;</span><span class="p">:</span>
+
         <span class="n">license_statement</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">            This content is available under a &lt;a target=&quot;_blank&quot; href=&quot;https://creativecommons.org/publicdomain/zero/1.0/&quot;&gt; </span>
 <span class="s2">                Creative Commons CC0&lt;/a&gt; license.</span>
 <span class="s2">        &quot;&quot;&quot;</span>
+
         <span class="n">scholia_credit_statement</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">        SPARQL queries adapted from &lt;a target=&quot;_blank&quot; href=&quot;https://scholia.toolforge.org/&quot;&gt;Scholia&lt;/a&gt;</span>
 <span class="s2">        &quot;&quot;&quot;</span>
@@ -447,48 +335,27 @@ Standard is to include all.</p></td>
 <span class="s2">        Dashboard  generated via &lt;a target=&quot;_blank&quot; href=&quot;https://pypi.org/project/wbib/&quot;&gt;Wikidata Bib&lt;/a&gt;</span>
 <span class="s2">        &quot;&quot;&quot;</span>
 
-    <span class="n">additional_curation_statement</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        &lt;h4&gt; Want improve Wikidata-powered science dashboards? &lt;/h4&gt;</span>
-<span class="s2">        &lt;ul style=&quot;display: inline-block; text-align: left&quot;&gt;</span>
-<span class="s2">            &lt;li&gt; Check Laura Dupuis&#39; &lt;a target=&quot;_blank&quot; href=&quot;https://laurendupuis.github.io/Scholia_tutorial/&quot;&gt;Tutorial&lt;/a&gt; for beginners &lt;/li&gt;</span>
-<span class="s2">            &lt;li&gt; Add articles to Wikidata via &lt;a href=&quot;https://sourcemd.toolforge.org/index_old.php&quot;&gt; SourceMD &lt;/a&gt; (needs 4-day account)&lt;/li&gt; </span>
-<span class="s2">            &lt;li&gt; Batch add topics via &lt;a target=&quot;_blank&quot; href=&quot;https://lubianat.shinyapps.io/topictagger/&quot;&gt; TopicTagger &lt;/a&gt; (needs 4-day account)&lt;/li&gt;</span>
-<span class="s2">        &lt;/ul&gt;</span>
+    <span class="n">sections</span> <span class="o">=</span> <span class="n">render</span><span class="o">.</span><span class="n">render_sections</span><span class="p">(</span><span class="n">sections_to_add</span><span class="p">,</span> <span class="n">query_options</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
 
-<span class="s2">    &quot;&quot;&quot;</span>
-
-    <span class="n">html</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">render</span><span class="o">.</span><span class="n">render_header</span><span class="p">(</span><span class="n">site_title</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">render</span><span class="o">.</span><span class="n">render_top</span><span class="p">(</span><span class="n">site_title</span><span class="p">,</span> <span class="n">site_subtitle</span><span class="p">)</span>
-        <span class="o">+</span> <span class="n">render</span><span class="o">.</span><span class="n">render_sections</span><span class="p">(</span><span class="n">sections_to_add</span><span class="p">,</span> <span class="n">query_options</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
-        <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">  &lt;/p&gt;</span>
-<span class="s2">  &lt;/div&gt;</span>
-<span class="s2"> &lt;/br&gt;</span>
-<span class="s2">  &lt;footer class=&quot;footer&quot;&gt;</span>
-<span class="s2">    &lt;div class=&quot;container&quot;&gt;</span>
-<span class="s2">      &lt;div class=&quot;content has-text-centered&quot;&gt;&quot;&quot;&quot;</span>
-        <span class="o">+</span> <span class="n">additional_curation_statement</span>
-        <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        &lt;br&gt;&lt;/br&gt;</span>
-<span class="s2">        &lt;h4&gt; Credits &lt;/h4&gt;</span>
-<span class="s2">        &lt;p&gt;&quot;&quot;&quot;</span>
-        <span class="o">+</span> <span class="n">license_statement</span>
-        <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&lt;/p&gt;</span>
-<span class="s2">        &lt;p&gt;&quot;&quot;&quot;</span>
-        <span class="o">+</span> <span class="n">scholia_credit_statement</span>
-        <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&lt;/p&gt;</span>
-<span class="s2">        &lt;p&gt;&quot;&quot;&quot;</span>
-        <span class="o">+</span> <span class="n">creator_statement</span>
-        <span class="o">+</span> <span class="s2">&quot;&quot;&quot; &lt;/p&gt; </span>
-<span class="s2">      &lt;/div&gt;</span>
-<span class="s2">    &lt;/div&gt;</span>
-<span class="s2">  &lt;/footer&gt;</span>
-<span class="s2">&lt;/body&gt;</span>
-<span class="s2">&lt;/html&gt;</span>
-<span class="s2">  &quot;&quot;&quot;</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">&quot;template.html.jinja&quot;</span><span class="p">)</span>
+    <span class="n">rendered_template</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+        <span class="n">site_title</span><span class="o">=</span><span class="n">site_title</span><span class="p">,</span>
+        <span class="n">site_subtitle</span><span class="o">=</span><span class="n">site_subtitle</span><span class="p">,</span>
+        <span class="n">sections</span><span class="o">=</span><span class="n">sections</span><span class="p">,</span>
+        <span class="n">license_statement</span><span class="o">=</span><span class="n">license_statement</span><span class="p">,</span>
+        <span class="n">scholia_credit</span><span class="o">=</span><span class="n">scholia_credit_statement</span><span class="p">,</span>
+        <span class="n">creator_statement</span><span class="o">=</span><span class="n">creator_statement</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">return</span> <span class="n">html</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.html&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">site_title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">))</span>
+    <span class="n">path_to_write</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">if</span> <span class="n">filepath</span> <span class="ow">is</span> <span class="s2">&quot;.&quot;</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_to_write</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">html</span><span class="p">:</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">rendered_template</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">rendered_template</span>
 </code></pre></div>
         </details>
     </div>
@@ -505,40 +372,38 @@ Standard is to include all.</p></td>
 
       <p>Converts a list of DOI ids to Wikidata QIDs.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li><p><strong>list_of_dois</strong> (<code>list</code>) – DOIs without prefix. For example:
+["10.3897/RIO.2.E9342", "10.3389/fimmu.2019.02736"]</p></li>
+        </ul>
+      </td>
     </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>list_of_dois</code></td>
-        <td><code>list</code></td>
-        <td><p>DOIs without prefix. For example:
-["10.3897/RIO.2.E9342", "10.3389/fimmu.2019.02736"]</p></td>
-        <td><em>required</em></td>
-      </tr>
   </tbody>
 </table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>dict</code></td>
-      <td><p>A dict with two key-value pairs. The "missing" key contains a set
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+        <ul class="first simple">
+          <li><p><code>dict</code> – A dict with two key-value pairs. The "missing" key contains a set
     with the DOIs not found, the "qids" key contain a set with the
-    QIDs found on Wikidata.</p></td>
+    QIDs found on Wikidata.</p></li>
+        </ul>
+    </td>
     </tr>
   </tbody>
 </table>
@@ -601,7 +466,7 @@ Standard is to include all.</p></td>
         <a href="../../about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../examples/basic/" class="btn btn-neutral" title="Basic"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../examples/advanced/" class="btn btn-neutral" title="Advanced"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -613,7 +478,7 @@ Standard is to include all.</p></td>
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -623,13 +488,13 @@ Standard is to include all.</p></td>
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
           <a href="https://github.com/lubianat/wbib/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../examples/basic/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../examples/advanced/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../../about/" style="color: #fcfcfc">Next &raquo;</a></span>
@@ -639,6 +504,11 @@ Standard is to include all.</p></td>
     <script>var base_url = '../..';</script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
