@@ -16,7 +16,7 @@ nav:
     - Contributors: authors.md
 repo_url: https://github.com/lubianat/wbib
 theme:
-  name: rtd-dropdown
+  name: readthedocs 
 plugins:
   - search
   - mkdocstrings
