@@ -16,46 +16,47 @@ The structure of the yaml is like this:
 title: Advanced Wikidata Bib
 
 subtitle: >
-  Advanced mode of Wikidata Bib
+    Advanced mode of Wikidata Bib
 
 restriction:
-  # - Remove all options for no restriction
-  #  (you can also remove this section and edit the query directly on queries.py)
-  #   Categories are united by AND (i.e. will need to match both author area and institution region)
-  # Qids inside categoy are united by OR(i.e. will select works that match any of the listed topics)
-  author_area:
-  #  - Q12149006 # Metabolomics
-  topic_of_work:
-  #  - Q12174 # Example: Obesity
-  institution_region:  
-  #  - Q12585 # Example: Latin America (works for countries and beyond)
-  gender:
-  # - Q6581072 # Female
-  event:
-  #  - Q106587263 # 1st Human Cell Atlas Latin America Single Cell RNA-seqData Analysis Workshop 
-  author_is_topic_of:
-    - Q106757464 # Science Super-Heroes: 52 Brazilians and their transformative research
+    # - Remove all options for no restriction
+    #  (you can also remove this section and edit the query directly on queries.py)
+    #   Categories are united by AND (i.e. will need to match both author area and institution region)
+    # Qids inside categoy are united by OR(i.e. will select works that match any of the listed topics)
+    author_area:
+    #  - Q12149006 # Metabolomics
+    topic_of_work:
+    #  - Q12174 # Example: Obesity
+    institution_region:
+    #  - Q12585 # Example: Latin America (works for countries and beyond)
+    gender:
+    # - Q6581072 # Female
+    event:
+    #  - Q106587263 # 1st Human Cell Atlas Latin America Single Cell RNA-seqData Analysis Workshop
+    author_is_topic_of:
+        - Q106757464 # Science Super-Heroes: 52 Brazilians and their transformative research
 
 sections:
-# - the name of the query: the label of the query
-# Comment out to remove from dashboard;
-# Change the order to change the order on the dashboard
-  - 100 most recent articles : 100 most recent articles
-  - map of institutions: Map of institutions
-  - list of authors: List of authors
-  - list of topics: List of related topics
-  - list of journals: List of venues where articles were published
+    # Comment out to remove from dashboard;
+    # Change the order to change the order on the dashboard
+    - articles
+    - map of institutions
+    - list of authors
+    - list of topics
+    - list of journals
+    - curation of author items
+    - curation of author affiliations
 
 license_statement: >
-  This content is available under a 
-  <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/"> 
-  Creative Commons CC0</a> license.
-  </a>
+    This content is available under a 
+    <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/"> 
+    Creative Commons CC0</a> license.
+    </a>
 scholia_credit: >
-  SPARQL queries adapted from 
-  <a target="_blank" href="https://scholia.toolforge.org/">Scholia</a>
+    SPARQL queries adapted from 
+    <a target="_blank" href="https://scholia.toolforge.org/">Scholia</a>
 creator_credit: >
-  Dashboard  generated via <a target="_blank" href="https://pypi.org/project/wbib/">Wikidata Bib</a>
+    Dashboard generated via <a target="_blank" href="https://pypi.org/project/wbib/">Wikidata Bib</a>
 
 ```
 
