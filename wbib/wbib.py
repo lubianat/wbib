@@ -141,6 +141,7 @@ def render_dashboard(
             creator_statement = info["creator_credit"]
             site_title = info["title"]
             site_subtitle = info["subtitle"]
+            sections_to_add = info["sections"]
 
     if mode == "basic":
 
