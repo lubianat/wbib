@@ -10,7 +10,7 @@ with open("README.md") as readme_file:
 with open("HISTORY.md") as history_file:
     history = history_file.read()
 
-requirements = ["pandas", "wikidata2df"]
+requirements = ["pandas", "wikidata2df", "Jinja2"]
 
 setup_requirements = []
 
@@ -44,6 +44,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/lubianat/wbib",
-    version="0.3.2",
+    version="0.3.4",
     zip_safe=False,
 )
