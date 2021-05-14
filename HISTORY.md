@@ -1,6 +1,7 @@
 # History
 
 ## 0.3.4 (2021-05-12)
+
 - Patch: Load Jinja2 template and add Jinja2 as requirement
 ## 0.3.0 (2021-05-11)
 
