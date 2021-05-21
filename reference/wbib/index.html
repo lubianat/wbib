@@ -187,6 +187,8 @@ At the same time, it saves the html to the file system via the filepath argument
     }
 }
 </code></pre>
+<pre><code>EXAMPLE_PAGES = {&quot;home&quot;: {&quot;href&quot;: &quot;/&quot;, &quot;name&quot;: &quot;Home&quot;}}
+</code></pre>
 
 <table class="field-list">
   <colgroup>
@@ -208,6 +210,7 @@ Standard is to include all.</p></li>
             <li><p><strong>site_title</strong> (<code>str</code>) – A title for the dashboard (if in "basic" mode)</p></li>
             <li><p><strong>site_subtitle</strong> (<code>str</code>) – A subtitle for the dashboard (if in "basic" mode)</p></li>
             <li><p><strong>filepath</strong> (<code>str</code>) – The filepath to write the dashboard to.</p></li>
+            <li><p><strong>pages</strong> (<code>dict</code>) – The pages that will be part of the final dashboard, as to make a simple navbar.</p></li>
         </ul>
       </td>
     </tr>
@@ -240,6 +243,7 @@ Standard is to include all.</p></li>
     <span class="n">site_title</span><span class="o">=</span><span class="s2">&quot;Wikidata Bibtex&quot;</span><span class="p">,</span>
     <span class="n">site_subtitle</span><span class="o">=</span><span class="s2">&quot;Demonstration&quot;</span><span class="p">,</span>
     <span class="n">filepath</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
+    <span class="n">pages</span><span class="o">=</span><span class="p">{},</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders a plain html string coding for a dashboard with embedded Wikidata SPARQL queries.</span>
@@ -290,7 +294,9 @@ Standard is to include all.</p></li>
 <span class="sd">        }</span>
 <span class="sd">    }</span>
 <span class="sd">    ```</span>
-
+<span class="sd">    ```</span>
+<span class="sd">    EXAMPLE_PAGES = {&quot;home&quot;: {&quot;href&quot;: &quot;/&quot;, &quot;name&quot;: &quot;Home&quot;}}</span>
+<span class="sd">    ```</span>
 <span class="sd">    Args:</span>
 <span class="sd">        info (dict): Either a dict containing complex information for the selector or a list of QIDs.</span>
 <span class="sd">        mode (str): A string representing the mode. If &quot;advanced&quot;, then a config is expected for the</span>
@@ -302,6 +308,7 @@ Standard is to include all.</p></li>
 <span class="sd">        site_title (str): A title for the dashboard (if in &quot;basic&quot; mode)</span>
 <span class="sd">        site_subtitle (str): A subtitle for the dashboard (if in &quot;basic&quot; mode)</span>
 <span class="sd">        filepath (str): The filepath to write the dashboard to.</span>
+<span class="sd">        pages (dict): The pages that will be part of the final dashboard, as to make a simple navbar.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: The html content for a static Wikidata-based dashboard.</span>
@@ -346,6 +353,7 @@ Standard is to include all.</p></li>
         <span class="n">license_statement</span><span class="o">=</span><span class="n">license_statement</span><span class="p">,</span>
         <span class="n">scholia_credit</span><span class="o">=</span><span class="n">scholia_credit_statement</span><span class="p">,</span>
         <span class="n">creator_statement</span><span class="o">=</span><span class="n">creator_statement</span><span class="p">,</span>
+        <span class="n">pages</span><span class="o">=</span><span class="n">pages</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.html&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">site_title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">))</span>
