@@ -10,7 +10,7 @@ def format_with_prefix(list_of_qids):
 def get_selector(info, mode="advanced"):
     """
     The selector that decides the scope of the dashboard. It MUST have the keywords
-    ?work and ?author. 
+    ?work and ?author.
     You can override everything here by adapting the query on WDQS:
     https://w.wiki/3Cmd
 
@@ -219,8 +219,6 @@ def get_query_url_for_missing_author_items(info, mode="basic"):
 def get_query_url_for_articles(info, mode="basic"):
     query = (
         """
-
-  #defaultView:Table
   SELECT
   (MIN(?dates) AS ?date)
   ?work ?workLabel
@@ -301,8 +299,6 @@ def get_query_url_for_topic_bubble(info, mode="basic"):
 def get_topics_as_table(info, mode="basic"):
     query_3 = (
         """
-
-
   #defaultView:Table
   SELECT ?count ?theme ?themeLabel ?example_work ?example_workLabel
   WITH {
@@ -409,9 +405,6 @@ SELECT
 def get_query_url_for_citing_authors(info, mode="basic"):
     query_6 = (
         """
-
-
-  #defaultView:Table
   SELECT
     ?count
     ?citing_author ?citing_authorLabel
@@ -458,7 +451,6 @@ def get_query_url_for_citing_authors(info, mode="basic"):
 def get_query_url_for_authors(info, mode="basic"):
     query_7 = (
         """
-  #defaultView:Table
   SELECT (COUNT(?work) AS ?count) ?author ?authorLabel ?orcids  WHERE {
   """
         + get_selector(info, mode)
@@ -474,4 +466,3 @@ def get_query_url_for_authors(info, mode="basic"):
   """
     )
     return render_url(query_7)
-
