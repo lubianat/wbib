@@ -1,107 +1,98 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{{ site_title }}</title>
-        <meta property="og:description" content="powered by Wikidata" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-            crossorigin="anonymous"
-        />
-        <link
-            href="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
-            rel="stylesheet"
-            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css"
-        />
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-    </head>
-    <body>
-        <section class="section">
-            <div class="container">
-                <div class="columns is-centered">
-                    <div class="column is-half has-text-centered">
-                        <h1 class="title is-1">{{ site_title }}</h1>
-                        <h2>{{ site_subtitle }}</h2>
-                    </div>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ site_title }}</title>
+    <meta property="og:description" content="powered by Wikidata" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-half has-text-centered">
+                    <h1 class="title is-1">{{ site_title }}</h1>
+                    <h2>{{ site_subtitle }}</h2>
                 </div>
             </div>
-        </section>
-
-        <div class="has-text-centered">
-            {%- for section in sections %}
-                <h5 class="title is-5">{{ section.legend }}</h5>
-                <p>
-                    <iframe
-                        width="75%"
-                        height="400"
-                        src="{{ section.query }}"
-                    ></iframe>
-                </p>
-                <br />
-            {%- endfor %}
         </div>
+    </section>
 
+    <div role="navigation">
+        <ul class="nav nav-pills justify-content-center">
+
+            {%- for page, value in pages.items() %}
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ value.href }}">{{ value.name }}</a>
+            </li>
+
+            {%- endfor %}
+
+        </ul>
+    </div>
+
+    <div class="has-text-centered">
+        {%- for section in sections %}
+        <h5 class="title is-5">{{ section.legend }}</h5>
+        <p>
+            <iframe width="75%" height="400" src="{{ section.query }}"></iframe>
+        </p>
         <br />
-        <footer class="footer">
-            <div class="container">
-                <div class="content has-text-centered">
-                    <h4>
-                        Want to improve Wikidata-powered science dashboards?
-                    </h4>
-                    <ul style="display: inline-block; text-align: left">
-                        <li>
-                            Check Laura Dupuis'
-                            <a
-                                target="_blank"
-                                href="https://laurendupuis.github.io/Scholia_tutorial/"
-                                >Tutorial</a
-                            >
-                            for beginners
-                        </li>
-                        <li>
-                            Add articles to Wikidata via
-                            <a
-                                href="https://sourcemd.toolforge.org/index_old.php"
-                            >
-                                SourceMD
-                            </a>
-                            (needs 4-day account)
-                        </li>
-                        <li>
-                            Batch add topics via
-                            <a
-                                target="_blank"
-                                href="https://lubianat.shinyapps.io/topictagger/"
-                            >
-                                TopicTagger
-                            </a>
-                            (needs 4-day account)
-                        </li>
-                    </ul>
-                    <br />
-                    <h4>Credits</h4>
-                    <p>
-                        {{ license_statement }}
-                    </p>
-                    <p>
-                        {{ scholia_credit }}
-                    </p>
-                    <p>
-                        {{ creator_statement }}
-                    </p>
-                </div>
+        {%- endfor %}
+    </div>
+
+    <br />
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <h4>
+                    Want to improve Wikidata-powered science dashboards?
+                </h4>
+                <ul style="display: inline-block; text-align: left">
+                    <li>
+                        Check Laura Dupuis'
+                        <a target="_blank" href="https://laurendupuis.github.io/Scholia_tutorial/">Tutorial</a>
+                        for beginners
+                    </li>
+                    <li>
+                        Add articles to Wikidata via
+                        <a href="https://sourcemd.toolforge.org/index_old.php">
+                            SourceMD
+                        </a>
+                        (needs 4-day account)
+                    </li>
+                    <li>
+                        Batch add topics via
+                        <a target="_blank" href="https://lubianat.shinyapps.io/topictagger/">
+                            TopicTagger
+                        </a>
+                        (needs 4-day account)
+                    </li>
+                </ul>
+                <br />
+                <h4>Credits</h4>
+                <p>
+                    {{ license_statement }}
+                </p>
+                <p>
+                    {{ scholia_credit }}
+                </p>
+                <p>
+                    {{ creator_statement }}
+                </p>
             </div>
-        </footer>
-    </body>
+        </div>
+    </footer>
+</body>
+
 </html>

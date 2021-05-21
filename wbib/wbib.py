@@ -53,6 +53,8 @@ DEFAULT_SESSIONS = [
     "curation of author affiliations",
 ]
 
+EXAMPLE_PAGES = {"home": {"href": "/", "name": "Home"}}
+
 
 def render_dashboard(
     info,
@@ -62,6 +64,7 @@ def render_dashboard(
     site_title="Wikidata Bibtex",
     site_subtitle="Demonstration",
     filepath=".",
+    pages={},
 ):
     """
     Renders a plain html string coding for a dashboard with embedded Wikidata SPARQL queries.
@@ -112,7 +115,9 @@ def render_dashboard(
         }
     }
     ```
-
+    ```
+    EXAMPLE_PAGES = {"home": {"href": "/", "name": "Home"}}
+    ```
     Args:
         info (dict): Either a dict containing complex information for the selector or a list of QIDs.
         mode (str): A string representing the mode. If "advanced", then a config is expected for the
@@ -124,6 +129,7 @@ def render_dashboard(
         site_title (str): A title for the dashboard (if in "basic" mode)
         site_subtitle (str): A subtitle for the dashboard (if in "basic" mode)
         filepath (str): The filepath to write the dashboard to.
+        pages (dict): The pages that will be part of the final dashboard, as to make a simple navbar.
 
     Returns:
         str: The html content for a static Wikidata-based dashboard.
@@ -168,6 +174,7 @@ def render_dashboard(
         license_statement=license_statement,
         scholia_credit=scholia_credit_statement,
         creator_statement=creator_statement,
+        pages=pages,
     )
 
     filename = "{}.html".format(site_title.lower().strip().replace(" ", "_"))
