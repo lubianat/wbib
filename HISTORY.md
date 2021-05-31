@@ -1,5 +1,9 @@
 # History
 
+## 0.3.6 (2021-05-30)
+
+    -Query: Changed "articles" query to select articles with at least 1 author that matches all restrictions. 
+
 ## 0.3.4 (2021-05-12)
 
 - Patch: Load Jinja2 template and add Jinja2 as requirement

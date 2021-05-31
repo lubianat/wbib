@@ -230,11 +230,11 @@ def get_query_url_for_articles(info, mode="basic"):
 """
         + get_selector(info, mode)
         + """
-  ?work wdt:P50 ?author .
+  ?work wdt:P50 ?author_all .
   OPTIONAL {
     ?author rdfs:label ?author_label_ . FILTER (LANG(?author_label_) = 'en')
   }
-  BIND(COALESCE(?author_label_, SUBSTR(STR(?author), 32)) AS ?author_label)
+  BIND(COALESCE(?author_label_, SUBSTR(STR(?author_all), 32)) AS ?author_label)
   OPTIONAL { ?work wdt:P31 ?type_ . ?type_ rdfs:label ?type_label . FILTER (LANG(?type_label) = 'en') }
   ?work wdt:P577 ?datetimes .
   BIND(xsd:date(?datetimes) AS ?dates)

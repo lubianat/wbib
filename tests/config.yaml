@@ -11,15 +11,15 @@ restriction:
     author_area:
     #  - Q12149006 # Metabolomics
     topic_of_work:
-    #  - Q12174 # Example: Obesity
+      - Q12174 # Example: Obesity
     institution_region:
-    #  - Q12585 # Example: Latin America (works for countries and beyond)
+      - Q12585 # Example: Latin America (works for countries and beyond)
     gender:
-    # - Q6581072 # Female
+     - Q6581072 # Female
     event:
     #  - Q106587263 # 1st Human Cell Atlas Latin America Single Cell RNA-seqData Analysis Workshop
     author_is_topic_of:
-        - Q106757464 # Science Super-Heroes: 52 Brazilians and their transformative research
+    #    - Q106757464 # Science Super-Heroes: 52 Brazilians and their transformative research
 
 sections:
     # Comment out to remove from dashboard;
