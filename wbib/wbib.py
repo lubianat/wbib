@@ -1,7 +1,6 @@
 """Main functions for the use by end users.
 """
 
-
 import pandas as pd
 from pathlib import Path
 from wbib import queries, render
@@ -61,8 +60,8 @@ def render_dashboard(
     mode="basic",
     query_options=DEFAULT_QUERY_OPTIONS,
     sections_to_add=DEFAULT_SESSIONS,
-    site_title="Wikidata Bibtex",
-    site_subtitle="Demonstration",
+    site_title="Wikidata Bib Dashboard",
+    site_subtitle="A dashboard for Wikidata-based bibliometrics for a given set of articles.",
     filepath=".",
     pages={},
 ):
