@@ -44,6 +44,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/lubianat/wbib",
-    version="0.3.6",
+    version="0.3.11",
     zip_safe=False,
 )

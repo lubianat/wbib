@@ -1,5 +1,10 @@
 # History
 
+## 0.3.11 (2024-02-21)
+
+  - Changed the default titles and subtitles of the basic display. 
+
+
 ## 0.3.6 (2021-05-30)
 
     -Query: Changed "articles" query to select articles with at least 1 author that matches all restrictions. 
